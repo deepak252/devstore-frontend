@@ -11,7 +11,7 @@
   }
 }
 
-@media #{$MEDIA_SCREEN_SM_ONLY}{
+@media #{$MEDIA_SCREEN_BELOW_SM}{
   .container{
     .content{
       margin-top: 110px;

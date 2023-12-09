@@ -4,7 +4,13 @@ $MEDIA_MD: 992px;
 $MEDIA_LG: 1200px;
 $MEDIA_XL: 1600px;
 
-$MEDIA_SCREEN_SM_ONLY:  'only screen and (max-width: #{$MEDIA_SM})';
+$MEDIA_SCREEN_BELOW_XS: 'only screen and (max-width: #{$MEDIA_XS})';
+$MEDIA_SCREEN_XS_TO_SM: 'only screen and (min-width: #{$MEDIA_XS}) and (max-width: #{$MEDIA_SM})';
+$MEDIA_SCREEN_XM_TO_MD: 'only screen and (min-width: #{$MEDIA_SM}) and (max-width: #{$MEDIA_MD})';
+$MEDIA_SCREEN_MD_TO_LG: 'only screen and (min-width: #{$MEDIA_MD}) and (max-width: #{$MEDIA_LG})';
+$MEDIA_SCREEN_ABOVE_LG: 'only screen and (min-width: #{$MEDIA_LG})';
+
+$MEDIA_SCREEN_BELOW_SM:  'only screen and (max-width: #{$MEDIA_SM})';
 
 $PRIMARY: #745B00; // Buttons, Active State (Checkbox)
 $ON_PRIMARY: #FFFFFF;

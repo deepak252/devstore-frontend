@@ -1,3 +1,13 @@
+@import './variables';
+@mixin font-twelve-light($color: $GRAY_4){
+  font-size: 12px;
+  color: $color;
+}
+
+@mixin font-fourteen-light($color: $GRAY_4){
+  font-size: 14px;
+  color: $color;
+}
 @mixin flex-container{
   display: flex;
   align-items: center;

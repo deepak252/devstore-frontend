@@ -1,0 +1,30 @@
+@import '../../../common';
+@import '../../../variables';
+
+.appContainer{
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  max-width: 100%;
+  border-radius: 8px;
+
+
+  &__icon{
+    // height: 140px;
+    // width: 140px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px 0 $GRAY_3;
+  }
+
+  &__info{
+    display: inline;
+    color: $ON_SURFACE;
+    margin: 8px 6px;
+    &__category, &__rating{
+      @include font-fourteen-light;
+    }
+    p{
+      margin: 0;
+    }
+  }
+}

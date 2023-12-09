@@ -13,7 +13,7 @@
     }
   }
 }
-@media #{$MEDIA_SCREEN_SM_ONLY}{
+@media #{$MEDIA_SCREEN_BELOW_SM}{
   .navbar__options{
     display: flex;
     justify-content: space-around;

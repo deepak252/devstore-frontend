@@ -28,7 +28,7 @@
  
 }
 
-@media #{$MEDIA_SCREEN_SM_ONLY}{
+@media #{$MEDIA_SCREEN_BELOW_SM}{
   .navbar{
     display: inline-block;
     &__actions{

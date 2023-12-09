@@ -1,4 +1,4 @@
-import ProptTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import styles from './index.module.scss'
 const AppLogo = ({
@@ -12,6 +12,6 @@ const AppLogo = ({
 }
 
 AppLogo.propTypes={
-  logoClass: ProptTypes.string
+  logoClass: PropTypes.string
 }
 export default AppLogo
