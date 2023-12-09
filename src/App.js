@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Apps from './views/Apps';
 import Games from './views/Games';
 import DefaultLayout from './components/DefaultLayout';
+import Websites from './views/Websites';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path='/' element={<DefaultLayout />}>
           <Route path='apps' element={<Apps />}/>
           <Route path='games' element={<Games />}/>  
+          <Route path='websites' element={<Websites />}/>  
         </Route>
       </Routes>
     </>

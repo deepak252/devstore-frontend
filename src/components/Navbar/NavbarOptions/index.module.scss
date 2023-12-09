@@ -5,7 +5,7 @@
   margin: 0 20px;
   a {
     color: $ON_SURFACE_CONTAINER;
-    padding: 12px;
+    padding: 8px 12px;
     text-decoration: none;
 
     &[class="active"] {
@@ -13,11 +13,12 @@
     }
   }
 }
-@media only screen and (max-width: #{$MEDIA_SM}){
+@media #{$MEDIA_SCREEN_SM_ONLY}{
   .navbar__options{
-    margin: 0 16px;
-    a{
-      display: block;
-    }
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 }

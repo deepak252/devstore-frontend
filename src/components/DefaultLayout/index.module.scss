@@ -1,5 +1,20 @@
+@import '../../common';
+@import '../../variables';
+
 .container{
+  @include flex-center;
   .content{
-    margin-top: 100px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 70px;
+    margin-top: 70px;
+  }
+}
+
+@media #{$MEDIA_SCREEN_SM_ONLY}{
+  .container{
+    .content{
+      margin-top: 110px;
+    }
   }
 }
