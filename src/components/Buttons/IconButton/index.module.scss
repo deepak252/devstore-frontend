@@ -1,0 +1,17 @@
+@import '../../../variables';
+@import '../../../common';
+
+.iconButton{
+  @include flex-center;
+  @include disable-select;
+  padding: 4px;
+  border-radius: 100%;
+
+  &:hover{
+    cursor: pointer;
+    background-color: $GRAY_1;
+  }
+  &:active{
+    background-color: $GRAY_2;
+  }
+}

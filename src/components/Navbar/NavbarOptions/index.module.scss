@@ -1,0 +1,23 @@
+@import '../../../variables';
+@import '../../../common';
+
+.navbar__options {
+  margin: 0 20px;
+  a {
+    color: $ON_SURFACE_CONTAINER;
+    padding: 12px;
+    text-decoration: none;
+
+    &[class="active"] {
+      font-weight: bold;
+    }
+  }
+}
+@media only screen and (max-width: #{$MEDIA_SM}){
+  .navbar__options{
+    margin: 0 16px;
+    a{
+      display: block;
+    }
+  }
+}
