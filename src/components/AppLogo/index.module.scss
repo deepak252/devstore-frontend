@@ -1,0 +1,14 @@
+@import '../../variables';
+@import '../../common';
+
+.logo{
+  @include disable-select;
+  display: inline;
+  span{
+    color: $PRIMARY;
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+}
