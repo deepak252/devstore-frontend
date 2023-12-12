@@ -5,10 +5,10 @@ import styles from './index.module.scss'
 const IconButton = ({
   icon,
   onClick,
-  buttonClass,
+  className,
 }) => {
   return (
-    <div onClick={onClick} className={classNames(styles.iconButton, buttonClass)}>
+    <div onClick={onClick} className={classNames(styles.container, className)}>
       {icon}
     </div>
   )
@@ -17,7 +17,7 @@ const IconButton = ({
 IconButton.propTypes = {
   icon: PropTypes.any.isRequired,
   onClick: PropTypes.func,
-  buttonClass: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default IconButton

@@ -11,15 +11,22 @@ $MEDIA_SCREEN_MD_TO_LG: 'only screen and (min-width: #{$MEDIA_MD}) and (max-widt
 $MEDIA_SCREEN_ABOVE_LG: 'only screen and (min-width: #{$MEDIA_LG})';
 
 $MEDIA_SCREEN_BELOW_SM:  'only screen and (max-width: #{$MEDIA_SM})';
+$MEDIA_SCREEN_BELOW_MD:  'only screen and (max-width: #{$MEDIA_MD})';
+$MEDIA_SCREEN_BELOW_LG:  'only screen and (max-width: #{$MEDIA_LG})';
+$MEDIA_SCREEN_BELOW_XL:  'only screen and (max-width: #{$MEDIA_XL})';
 
-$PRIMARY: #745B00; // Buttons, Active State (Checkbox)
+$PRIMARY: #646DDF; // Buttons, Active State (Checkbox), Textfield border (Focus)
 $ON_PRIMARY: #FFFFFF;
-$PRIMARY_CONTAINER: #FFE08B; // Floating Button
-$ON_PRIMARY_CONTAINER: #241A00;
-$SECONDARY: #695D3F;
+$PRIMARY_CONTAINER: #E0E0FF; // Floating Button
+$ON_PRIMARY_CONTAINER: #020865;
+$SECONDARY: #5C5D72; // Date Picker
 $ON_SECONDARY: #FFFFFF;
-$SECONDARY_CONTAINER: #F2E1BB; // Chip
-$ON_SECONDARY_CONTAINER: #231B04;
+$SECONDARY_CONTAINER: #E1E0F9; // Chip
+$ON_SECONDARY_CONTAINER: #191A2C;
+$TERTIARY: #78536B;
+$ON_TERTIARY: #FFFFFF;
+
+$OUTLINE: #777680; // Border: Chip,Outline Button, Text Field (unfocus)
 
 $ERROR: #BA1A1A;
 $ON_ERROR: #FFFFFF;
@@ -28,9 +35,13 @@ $ON_ERROR_CONTAINER: #410002;
 
 // $SURFACE: #FFF8F1;
 $SURFACE: #FFFFFF;
-$ON_SURFACE: #1E1B16;
-$SURFACE_CONTAINER: #e3d6c8;
-$ON_SURFACE_CONTAINER: #1E1B16;
+$ON_SURFACE: #1B1B1F;
+$SURFACE_CONTAINER: #E3E1EC;
+$ON_SURFACE_CONTAINER: #46464F;
+$INVERSE_SURFACE: #020865;
+$ON_INVERSE_SURFACE: #FFFFFF;
+// val md_theme_light_inverseOnSurface = Color(F3F0F4)
+// val md_theme_light_inverseSurface = Color(303034)
 
 
 $GRAY_6:#404040;
@@ -40,63 +51,65 @@ $GRAY_3:#a3a3a3;
 $GRAY_2: #c7c7c7;
 $GRAY_1: #e4e4e4;
 
+//********** 3. Indigo
+// val md_theme_light_primary = Color(4F56A9)
+// val md_theme_light_onPrimary = Color(FFFFFF)
+// val md_theme_light_primaryContainer = Color(E0E0FF)
+// val md_theme_light_onPrimaryContainer = Color(020865)
+// val md_theme_light_secondary = Color(5C5D72)
+// val md_theme_light_onSecondary = Color(FFFFFF)
+// val md_theme_light_secondaryContainer = Color(E1E0F9)
+// val md_theme_light_onSecondaryContainer = Color(191A2C)
+// val md_theme_light_tertiary = Color(78536B)
+// val md_theme_light_onTertiary = Color(FFFFFF)
+// val md_theme_light_tertiaryContainer = Color(FFD7EE)
+// val md_theme_light_onTertiaryContainer = Color(2E1126)
+// val md_theme_light_error = Color(BA1A1A)
+// val md_theme_light_errorContainer = Color(FFDAD6)
+// val md_theme_light_onError = Color(FFFFFF)
+// val md_theme_light_onErrorContainer = Color(410002)
+// val md_theme_light_background = Color(FFFBFF)
+// val md_theme_light_onBackground = Color(1B1B1F)
+// val md_theme_light_outline = Color(777680)
+// val md_theme_light_inverseOnSurface = Color(F3F0F4)
+// val md_theme_light_inverseSurface = Color(303034)
+// val md_theme_light_inversePrimary = Color(BEC2FF)
+// val md_theme_light_surfaceTint = Color(4F56A9)
+// val md_theme_light_outlineVariant = Color(C7C5D0)
+// val md_theme_light_scrim = Color(000000)
+// val md_theme_light_surface = Color(FCF8FD)
+// val md_theme_light_onSurface = Color(1B1B1F)
+// val md_theme_light_surfaceVariant = Color(E3E1EC)
+// val md_theme_light_onSurfaceVariant = Color(46464F)
 
-// val md_theme_light_primary = Color(0xFF745B00)
-// val md_theme_light_onPrimary = Color(0xFFFFFFFF)
-// val md_theme_light_primaryContainer = Color(0xFFFFE08B)
-// val md_theme_light_onPrimaryContainer = Color(0xFF241A00)
-// val md_theme_light_secondary = Color(0xFF695D3F)
-// val md_theme_light_onSecondary = Color(0xFFFFFFFF)
-// val md_theme_light_secondaryContainer = Color(0xFFF2E1BB)
-// val md_theme_light_onSecondaryContainer = Color(0xFF231B04)
-// val md_theme_light_tertiary = Color(0xFF47664A)
-// val md_theme_light_onTertiary = Color(0xFFFFFFFF)
-// val md_theme_light_tertiaryContainer = Color(0xFFC8ECC9)
-// val md_theme_light_onTertiaryContainer = Color(0xFF03210B)
-// val md_theme_light_error = Color(0xFFBA1A1A)
-// val md_theme_light_errorContainer = Color(0xFFFFDAD6)
-// val md_theme_light_onError = Color(0xFFFFFFFF)
-// val md_theme_light_onErrorContainer = Color(0xFF410002)
-// val md_theme_light_background = Color(0xFFFFFBFF)
-// val md_theme_light_onBackground = Color(0xFF1E1B16)
-// val md_theme_light_outline = Color(0xFF7E7667)
-// val md_theme_light_inverseOnSurface = Color(0xFFF7F0E7)
-// val md_theme_light_inverseSurface = Color(0xFF33302A)
-// val md_theme_light_inversePrimary = Color(0xFFEAC248)
-// val md_theme_light_surfaceTint = Color(0xFF745B00)
-// val md_theme_light_outlineVariant = Color(0xFFCFC5B4)
-// val md_theme_light_scrim = Color(0xFF000000)
-// val md_theme_light_surface = Color(0xFFFFF8F1)
-// val md_theme_light_onSurface = Color(0xFF1E1B16)
-// val md_theme_light_surfaceVariant = Color(0xFFEBE1CF)
-// val md_theme_light_onSurfaceVariant = Color(0xFF4C4639)
+// val md_theme_dark_primary = Color(BEC2FF)
+// val md_theme_dark_onPrimary = Color(1E2578)
+// val md_theme_dark_primaryContainer = Color(363E90)
+// val md_theme_dark_onPrimaryContainer = Color(E0E0FF)
+// val md_theme_dark_secondary = Color(C5C4DD)
+// val md_theme_dark_onSecondary = Color(2E2F42)
+// val md_theme_dark_secondaryContainer = Color(444559)
+// val md_theme_dark_onSecondaryContainer = Color(E1E0F9)
+// val md_theme_dark_tertiary = Color(E7B9D5)
+// val md_theme_dark_onTertiary = Color(45263C)
+// val md_theme_dark_tertiaryContainer = Color(5E3C53)
+// val md_theme_dark_onTertiaryContainer = Color(FFD7EE)
+// val md_theme_dark_error = Color(FFB4AB)
+// val md_theme_dark_errorContainer = Color(93000A)
+// val md_theme_dark_onError = Color(690005)
+// val md_theme_dark_onErrorContainer = Color(FFDAD6)
+// val md_theme_dark_background = Color(1B1B1F)
+// val md_theme_dark_onBackground = Color(E5E1E6)
+// val md_theme_dark_outline = Color(91909A)
+// val md_theme_dark_inverseOnSurface = Color(1B1B1F)
+// val md_theme_dark_inverseSurface = Color(E5E1E6)
+// val md_theme_dark_inversePrimary = Color(4F56A9)
+// val md_theme_dark_surfaceTint = Color(BEC2FF)
+// val md_theme_dark_outlineVariant = Color(46464F)
+// val md_theme_dark_scrim = Color(000000)
+// val md_theme_dark_surface = Color(131316)
+// val md_theme_dark_onSurface = Color(C8C5CA)
+// val md_theme_dark_surfaceVariant = Color(46464F)
+// val md_theme_dark_onSurfaceVariant = Color(C7C5D0)
+// val seed = Color(1D2473)
 
-// val md_theme_dark_primary = Color(0xFFEAC248)
-// val md_theme_dark_onPrimary = Color(0xFF3D2F00)
-// val md_theme_dark_primaryContainer = Color(0xFF584400)
-// val md_theme_dark_onPrimaryContainer = Color(0xFFFFE08B)
-// val md_theme_dark_secondary = Color(0xFFD5C5A1)
-// val md_theme_dark_onSecondary = Color(0xFF392F15)
-// val md_theme_dark_secondaryContainer = Color(0xFF50462A)
-// val md_theme_dark_onSecondaryContainer = Color(0xFFF2E1BB)
-// val md_theme_dark_tertiary = Color(0xFFADCFAE)
-// val md_theme_dark_onTertiary = Color(0xFF19361F)
-// val md_theme_dark_tertiaryContainer = Color(0xFF304D34)
-// val md_theme_dark_onTertiaryContainer = Color(0xFFC8ECC9)
-// val md_theme_dark_error = Color(0xFFFFB4AB)
-// val md_theme_dark_errorContainer = Color(0xFF93000A)
-// val md_theme_dark_onError = Color(0xFF690005)
-// val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
-// val md_theme_dark_background = Color(0xFF1E1B16)
-// val md_theme_dark_onBackground = Color(0xFFE8E1D9)
-// val md_theme_dark_outline = Color(0xFF989080)
-// val md_theme_dark_inverseOnSurface = Color(0xFF1E1B16)
-// val md_theme_dark_inverseSurface = Color(0xFFE8E1D9)
-// val md_theme_dark_inversePrimary = Color(0xFF745B00)
-// val md_theme_dark_surfaceTint = Color(0xFFEAC248)
-// val md_theme_dark_outlineVariant = Color(0xFF4C4639)
-// val md_theme_dark_scrim = Color(0xFF000000)
-// val md_theme_dark_surface = Color(0xFF15130E)
-// val md_theme_dark_onSurface = Color(0xFFCCC6BD)
-// val md_theme_dark_surfaceVariant = Color(0xFF4C4639)
-// val md_theme_dark_onSurfaceVariant = Color(0xFFCFC5B4)

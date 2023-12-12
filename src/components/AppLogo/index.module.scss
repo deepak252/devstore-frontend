@@ -3,12 +3,15 @@
 
 .logo{
   @include disable-select;
-  display: inline;
-  span{
-    color: $PRIMARY;
+  display: inline-block;
+  a{
+    color: #020865;
     margin: 0;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
     white-space: nowrap;
+    font-family: 'Josefin Sans', sans-serif;
+    text-decoration: none;
+    
   }
 }
