@@ -12,13 +12,15 @@ const AppLogo = ({
         to='/apps' 
         onClick={(e)=>pointerDisabled && e.preventDefault()}
         style={{pointerEvents: pointerDisabled && 'none'}}
-      >Dev Store</NavLink>
+      >
+        Dev Store
+      </NavLink>
     </div>
   )
 }
 
 AppLogo.propTypes={
   className: PropTypes.string,
-  pointerDisabled: false
+  pointerDisabled: PropTypes.func
 }
 export default AppLogo

@@ -1,9 +1,13 @@
+import PropTypes from 'prop-types';
 import AppLogo from "../../../components/AppLogo";
 import OutlinedButton from "../../../components/Buttons/OutlinedButton";
 import FlatButton from "../../../components/Buttons/FlatButton";
 import styles from "./index.module.scss";
 
-const AuthNavbar = () => {
+const AuthNavbar = ({
+  onClickSignIn,
+  onClickSignUp,
+}) => {
 
   return (
     <nav className={styles.navbar}>
@@ -12,15 +16,20 @@ const AuthNavbar = () => {
         <OutlinedButton
           text={"Sign In"}
           className={styles.navbar__actions__btnSignIn}
+          onClick={onClickSignIn}
         />
         <FlatButton
           text={"Sign Up"}
           className={styles.navbar__actions__btnSignUp}
+          onClick={onClickSignUp}
         />
       </div>
     </nav>
   );
 };
 
-AuthNavbar.defaultProps = {};
+AuthNavbar.propTypes = {
+  onClickSignIn: PropTypes.func,
+  onClickSignUp: PropTypes.func,
+};
 export default AuthNavbar;

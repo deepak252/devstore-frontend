@@ -117,7 +117,10 @@ const Auth = () => {
 
   return (
     <div className={styles.layout}>
-      <AuthNavbar />
+      <AuthNavbar
+        onClickSignIn={() => setFormType(FORM_CONFIG.SIGN_IN.name)}
+        onClickSignUp={() => setFormType(FORM_CONFIG.SIGN_UP.name)}
+      />
       <div className={styles.layout__bg}>
         <BGAuth className={styles.layout__bg__graphic} />
       </div>
