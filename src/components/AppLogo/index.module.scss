@@ -4,12 +4,14 @@
 .logo{
   @include disable-select;
   display: inline-block;
-  span{
+  a{
     color: #020865;
     margin: 0;
     font-size: 28px;
     font-weight: bold;
     white-space: nowrap;
     font-family: 'Josefin Sans', sans-serif;
+    text-decoration: none;
+    
   }
 }
