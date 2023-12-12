@@ -1,0 +1,20 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container{
+  @include button;
+  @include flex-center;
+  
+  color: $PRIMARY;
+  border: 1.5px solid $PRIMARY;
+  padding: 12px 24px;
+  font-weight: 600;
+
+  span{
+    @include overflow-ellipsis;
+  }
+
+  &:active{
+    background-color: #E0E0FFAA;
+  }
+}

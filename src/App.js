@@ -4,6 +4,7 @@ import Games from './views/Games';
 import DefaultLayout from './components/DefaultLayout';
 import Websites from './views/Websites';
 import Home from './views/Home';
+import Auth from './views/Auth';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='games' element={<Games />}/>  
           <Route path='websites' element={<Websites />}/>  
         </Route>
+        <Route path='/auth' element={<Auth />} />
       </Routes>
     </>
   );

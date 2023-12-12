@@ -1,7 +1,7 @@
 @import '../../../variables';
 @import '../../../common';
 
-.iconButton{
+.container{
   @include flex-center;
   @include disable-select;
   padding: 4px;

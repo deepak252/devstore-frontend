@@ -12,18 +12,18 @@ const Navbar = ({children}) => {
 
   return (
     <nav className={styles.navbar}>
-      <AppLogo logoClass={styles.navbar__logo}/>
+      <AppLogo className={styles.navbar__logo}/>
       {
         !isSmallScreen  && children
       }
       <div className={styles.navbar__actions}>
         <IconButton 
           icon={<SearchIcon className='size-24'/>}
-          buttonClass={styles.navbar__actions__iconButton}
+          className={styles.navbar__actions__iconButton}
         />
         <IconButton 
           icon={<UserIcon className='size-36'/>}
-          buttonClass={styles.navbar__actions__iconButton}
+          className={styles.navbar__actions__iconButton}
         />
       </div>
       {
