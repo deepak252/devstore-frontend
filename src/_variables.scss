@@ -15,6 +15,9 @@ $MEDIA_SCREEN_BELOW_MD:  'only screen and (max-width: #{$MEDIA_MD})';
 $MEDIA_SCREEN_BELOW_LG:  'only screen and (max-width: #{$MEDIA_LG})';
 $MEDIA_SCREEN_BELOW_XL:  'only screen and (max-width: #{$MEDIA_XL})';
 
+$Z_INDEX_NAVBAR: 999;
+$Z_INDEX_DROPDOWN: 500;
+
 $PRIMARY: #646DDF; // Buttons, Active State (Checkbox), Textfield border (Focus)
 $ON_PRIMARY: #FFFFFF;
 $PRIMARY_CONTAINER: #E0E0FF; // Floating Button

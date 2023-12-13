@@ -1,0 +1,22 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container{
+  position: relative;  
+  display: inline-block;
+  &__content{
+    @include disable-select;
+    position: absolute;
+    z-index: $Z_INDEX_DROPDOWN;
+    background-color: $SURFACE;
+    border: 1px solid $GRAY_2;
+    box-shadow: 1px 1px 4px 2px $GRAY_1;
+    width: 200px;
+    padding: 8px 12px;
+    margin-top: 8px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    overflow-y: auto;
+    max-height: 300px;
+  }
+}

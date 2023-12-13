@@ -1,0 +1,34 @@
+<svg
+  width="64px"
+  height="64px"
+  viewBox="0 0 24.00 24.00"
+  id="_24x24_On_Light_Checkmark"
+  data-name="24x24/On Light/Checkmark"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="#646DDF"
+  transform="rotate(0)"
+>
+  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+  <g
+    id="SVGRepo_tracerCarrier"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke="#CCCCCC"
+    stroke-width="0.384"
+  ></g>
+  <g id="SVGRepo_iconCarrier">
+    <rect
+      id="view-box"
+      width="24"
+      height="24"
+      fill="#646DDF"
+      opacity="0"
+    ></rect>
+    <path
+      id="Shape"
+      d="M5.341,12.247a1,1,0,0,0,1.317,1.505l4-3.5a1,1,0,0,0,.028-1.48l-9-8.5A1,1,0,0,0,.313,1.727l8.2,7.745Z"
+      transform="translate(19 6.5) rotate(90)"
+      fill="#646DDF"
+    ></path>
+  </g>
+</svg>
