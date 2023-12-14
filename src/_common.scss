@@ -33,11 +33,15 @@
 
 @mixin button{
   @include disable-select;
+  @include flex-center;
+  font-size: 13px;
   border: none;
   outline: none;
   background-color: transparent;
   border-radius: 12px;
   cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
 
   &:disabled {
     opacity: 0.6;

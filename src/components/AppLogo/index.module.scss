@@ -4,7 +4,9 @@
 .logo{
   @include disable-select;
   display: inline-block;
+  
   a{
+    @include flex-center;
     color: #020865;
     margin: 0;
     font-size: 28px;
@@ -12,6 +14,17 @@
     white-space: nowrap;
     font-family: 'Josefin Sans', sans-serif;
     text-decoration: none;
+
+    img[alt='app_logo']{
+      height: 50px;
+      width: 50px;
+      background-color: $PRIMARY_CONTAINER;
+      border-radius: 12px;
+    }
+
+    span{
+      padding: 6px 0 0 8px ;
+    }
     
   }
 }

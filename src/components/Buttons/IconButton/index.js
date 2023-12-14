@@ -1,16 +1,22 @@
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import ButtonWrapper from '../ButtonWrapper'
 import styles from './index.module.scss'
 
 const IconButton = ({
   icon,
   onClick,
   className,
+  ...props
 }) => {
   return (
-    <div onClick={onClick} className={classNames(styles.container, className)}>
+    <ButtonWrapper
+      onClick={onClick} 
+      className={classNames(styles.container, className)}
+      {...props}
+    >
       {icon}
-    </div>
+    </ButtonWrapper>
   )
 }
 
