@@ -2,7 +2,7 @@ import axios from 'axios';
 import { clearCache, getAuthToken } from '../app/cache';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
 
 export const setupInterceptor = (navigate) => {
