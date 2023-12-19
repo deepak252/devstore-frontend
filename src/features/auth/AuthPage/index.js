@@ -16,6 +16,7 @@ import { ReactComponent as CheckCircle } from '../../../assets/icons/CheckCircle
 import useFormValidator from '../../../hooks/useFormValidator';
 import {
   validateEmail,
+  validateUsernameOrEmail,
   validatePasswordSignIn,
   validatePasswordSignUp,
   validateUsername,
@@ -40,7 +41,7 @@ const FORM_CONFIG = Object.freeze({
     name: 'SIGN_IN',
     buttonText: 'Sign In',
     validator: {
-      email: validateEmail,
+      usernameOrEmail: validateUsernameOrEmail,
       password: validatePasswordSignIn,
     },
   },
@@ -68,6 +69,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const [formName, setFormType] = useState(FORM_CONFIG.SIGN_IN.name);
   const [formData, setFormData] = useState({
+    usernameOrEmail: '',
     email: '',
     password: '',
     username: '',
@@ -144,7 +146,7 @@ const Auth = () => {
     if (formName === FORM_CONFIG.SIGN_IN.name) {
       dispatch(
         signIn({
-          email: formData.email,
+          usernameOrEmail: formData.usernameOrEmail,
           password: formData.password,
         })
       );
@@ -203,17 +205,28 @@ const Auth = () => {
           <div className={styles.layout__form__divider}>
             <span>OR</span>
           </div>
-
-          <TextField
-            title={'Email'}
-            placeholder={'Enter email'}
-            name={'email'}
-            type={'email'}
-            value={formData?.email}
-            onChange={handleInputChange}
-            error={error?.email}
-            wrapperClass={styles.layout__form__textfieldWrapper}
-          />
+          {FORM_CONFIG.SIGN_IN.name === formName ? (
+            <TextField
+              title={'Username or Email'}
+              placeholder={'Enter username or email'}
+              name={'usernameOrEmail'}
+              value={formData?.usernameOrEmail}
+              onChange={handleInputChange}
+              error={error?.usernameOrEmail}
+              wrapperClass={styles.layout__form__textfieldWrapper}
+            />
+          ) : (
+            <TextField
+              title={'Email'}
+              placeholder={'Enter email'}
+              name={'email'}
+              type={'email'}
+              value={formData?.email}
+              onChange={handleInputChange}
+              error={error?.email}
+              wrapperClass={styles.layout__form__textfieldWrapper}
+            />
+          )}
           {[FORM_CONFIG.SIGN_IN.name, FORM_CONFIG.SIGN_UP.name].includes(
             formName
           ) && (

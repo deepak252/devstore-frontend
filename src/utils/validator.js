@@ -15,7 +15,7 @@ export const validatePhone = (val) => {
 
 export const validateUsername = (val) => {
   if (isEmptyString(val)) {
-    return 'Enter username';
+    return 'Username can\'t be empty';
   }
   if (val.length < 3) {
     return 'Username must contain at least 3 characters';
@@ -30,22 +30,29 @@ export const validateUsername = (val) => {
 
 export const validateEmail = (val) => {
   if (isEmptyString(val)) {
-    return 'Enter email';
+    return 'Email can\'t be empty';
   }
   if (!REGEX.EMAIL.test(val)) {
     return 'Invalid email ID';
   }
 };
 
+export const validateUsernameOrEmail = (val) => {
+  if (isEmptyString(val)) {
+    return 'Username/email can\'t be empty';
+  }
+};
+
+
 export const validatePasswordSignIn = (val) => {
   if (isEmptyString(val)) {
-    return 'Enter password';
+    return 'Password can\'t be empty';
   }
 };
 
 export const validatePasswordSignUp = (val) => {
   if (isEmptyString(val)) {
-    return 'Enter password';
+    return 'Password can\'t be empty';
   }
   if (val.trim().length < 6) {
     return 'Password must contains at least 6 characters';

@@ -16,9 +16,9 @@ import {
 
 function* signInHandler(action) {
   try {
-    const { email, password } = action.payload;
+    const { usernameOrEmail, password } = action.payload;
     const response = yield call(postRequest, SIGN_IN_API, {
-      data: { email, password },
+      data: { usernameOrEmail, password },
     });
     if (response && response.status >= 200 && response.status <= 299) {
       cacheAuthToken(response.data?.data?.token);
