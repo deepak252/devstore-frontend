@@ -56,6 +56,7 @@ Modal.propTypes = {
   closeOnOutsideClick: PropTypes.bool,
   closeOnEsc: PropTypes.bool,
   wrapperClass: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Modal;

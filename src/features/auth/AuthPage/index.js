@@ -7,6 +7,7 @@ import TextField from '../../../components/TextField';
 import FlatButton from '../../../components/Buttons/FlatButton';
 import OutlinedButton from '../../../components/Buttons/OutlinedButton';
 import LoaderModal from '../../../components/Modal/LoaderModal';
+import Toast from '../../../components/Toast';
 import { ReactComponent as BGAuth } from '../../../assets/images/BG_Auth.svg';
 import { ReactComponent as GoogleIcon } from '../../../assets/icons/Google.svg';
 import { ReactComponent as GithubIcon } from '../../../assets/icons/Github.svg';
@@ -18,8 +19,9 @@ import {
   validatePasswordSignUp,
 } from '../../../utils/validator';
 import { getGoogleUrl } from '../../../utils/oAuth';
-import { signIn, signUp } from '../authSlice';
+import { setToast, signIn, signUp } from '../authSlice';
 import { getUser } from '../../user/userSlice';
+import { TOAST_INITIAL_DATA } from '../../../constants';
 import styles from './index.module.scss';
 
 const FORM_CONFIG = Object.freeze({
@@ -58,6 +60,7 @@ const Auth = () => {
   });
   const isAuthenticated = useSelector((state) => state?.auth?.isAuthenticated);
   const isLoading = useSelector((state) => state?.auth?.isLoading);
+  const toastData = useSelector((state) => state?.auth?.toastData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error, validateField, validateForm, clearFormError, setError } =
@@ -239,6 +242,15 @@ const Auth = () => {
         </div>
       </div>
       {isLoading && <LoaderModal isOpen={isLoading} />}
+      {toastData?.message && (
+        <Toast
+          message={toastData.message}
+          type={toastData.type}
+          onClose={() => {
+            dispatch(setToast(TOAST_INITIAL_DATA));
+          }}
+        />
+      )}
     </>
   );
 };

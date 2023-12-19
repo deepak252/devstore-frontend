@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TOAST_INITIAL_DATA, TOAST_TYPE } from '../../constants';
 
 const initialState = {
   isLoading: false,
   isAuthenticated: false,
   error: null,
+  toastData: TOAST_INITIAL_DATA,
 };
 
 const authSlice = createSlice({
@@ -22,6 +24,10 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.error = action.payload;
       state.isLoading = false;
+      state.toastData = {
+        type: TOAST_TYPE.ERROR,
+        message: action.payload,
+      };
     },
     signUp: (state) => {
       state.isLoading = true;
@@ -35,9 +41,16 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.error = action.payload;
       state.isLoading = false;
+      state.toastData = {
+        type: TOAST_TYPE.ERROR,
+        message: action.payload,
+      };
     },
     signOut: (state) => {
       state.isAuthenticated = false;
+    },
+    setToast: (state, action) => {
+      state.toastData = action.payload;
     },
   },
 });
@@ -50,6 +63,7 @@ export const {
   signUpSuccess,
   signUpFailure,
   signOut,
+  setToast,
 } = authSlice.actions;
 
 export default authSlice.reducer;
