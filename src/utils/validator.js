@@ -13,6 +13,21 @@ export const validatePhone = (val) => {
   }
 };
 
+export const validateUsername = (val) => {
+  if (isEmptyString(val)) {
+    return 'Enter username';
+  }
+  if (val.length < 3) {
+    return 'Username must contain at least 3 characters';
+  }
+  if (val.length > 20) {
+    return 'Username should not contain more than 20 characters';
+  }
+  if (!REGEX.ALPHANUMERIC.test(val)) {
+    return 'Username should contain only letters and numbers';
+  }
+};
+
 export const validateEmail = (val) => {
   if (isEmptyString(val)) {
     return 'Enter email';

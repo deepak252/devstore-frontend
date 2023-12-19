@@ -5,6 +5,9 @@ const initialState = {
   isLoading: false,
   isAuthenticated: false,
   error: null,
+  isLoadingUsername: false,
+  isUsernameAvailable: null,
+  usernameError: null,
   toastData: TOAST_INITIAL_DATA,
 };
 
@@ -19,6 +22,9 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.error = null;
       state.isLoading = false;
+      state.isLoadingUsername = false;
+      state.isUsernameAvailable = null;
+      state.usernameError = null;
     },
     signInFailure: (state, action) => {
       state.isAuthenticated = false;
@@ -36,6 +42,9 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.error = null;
       state.isLoading = false;
+      state.isLoadingUsername = false;
+      state.isUsernameAvailable = null;
+      state.usernameError = null;
     },
     signUpFailure: (state, action) => {
       state.isAuthenticated = false;
@@ -45,6 +54,22 @@ const authSlice = createSlice({
         type: TOAST_TYPE.ERROR,
         message: action.payload,
       };
+    },
+    checkUsernameAvailable: (state) => {
+      state.isLoadingUsername = true;
+    },
+    usernameAvailableSuccess: (state) => {
+      state.isLoadingUsername = false;
+      state.isUsernameAvailable = true;
+      state.usernameError = null;
+    },
+    usernameAvailableFailure: (state, action) => {
+      state.isLoadingUsername = false;
+      state.isUsernameAvailable = false;
+      state.usernameError = action.payload;
+    },
+    setUsernameAvailable: (state, action) => {
+      state.isUsernameAvailable = action.payload;
     },
     signOut: (state) => {
       state.isAuthenticated = false;
@@ -62,6 +87,10 @@ export const {
   signUp,
   signUpSuccess,
   signUpFailure,
+  checkUsernameAvailable,
+  usernameAvailableSuccess,
+  usernameAvailableFailure,
+  setUsernameAvailable,
   signOut,
   setToast,
 } = authSlice.actions;

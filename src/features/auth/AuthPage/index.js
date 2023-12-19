@@ -8,21 +8,32 @@ import FlatButton from '../../../components/Buttons/FlatButton';
 import OutlinedButton from '../../../components/Buttons/OutlinedButton';
 import LoaderModal from '../../../components/Modal/LoaderModal';
 import Toast from '../../../components/Toast';
+import Loader from '../../../components/Loader';
 import { ReactComponent as BGAuth } from '../../../assets/images/BG_Auth.svg';
 import { ReactComponent as GoogleIcon } from '../../../assets/icons/Google.svg';
 import { ReactComponent as GithubIcon } from '../../../assets/icons/Github.svg';
+import { ReactComponent as CheckCircle } from '../../../assets/icons/CheckCircleGreen.svg';
 import useFormValidator from '../../../hooks/useFormValidator';
 import {
-  validateConfirmPassword,
   validateEmail,
   validatePasswordSignIn,
   validatePasswordSignUp,
+  validateUsername,
 } from '../../../utils/validator';
 import { getGoogleUrl } from '../../../utils/oAuth';
-import { setToast, signIn, signUp } from '../authSlice';
+import {
+  checkUsernameAvailable,
+  setUsernameAvailable,
+  setToast,
+  signIn,
+  signUp,
+} from '../authSlice';
 import { getUser } from '../../user/userSlice';
 import { TOAST_INITIAL_DATA } from '../../../constants';
+import { debounceHandler } from '../../../utils';
 import styles from './index.module.scss';
+
+const debounce = debounceHandler();
 
 const FORM_CONFIG = Object.freeze({
   SIGN_IN: {
@@ -39,6 +50,7 @@ const FORM_CONFIG = Object.freeze({
     validator: {
       email: validateEmail,
       password: validatePasswordSignUp,
+      username: validateUsername,
     },
   },
   RESET_PASSWORD: {
@@ -52,18 +64,23 @@ const FORM_CONFIG = Object.freeze({
 
 const Auth = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formName, setFormType] = useState(FORM_CONFIG.SIGN_IN.name);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    confirmPassword: '',
+    username: '',
   });
-  const isAuthenticated = useSelector((state) => state?.auth?.isAuthenticated);
-  const isLoading = useSelector((state) => state?.auth?.isLoading);
-  const toastData = useSelector((state) => state?.auth?.toastData);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { error, validateField, validateForm, clearFormError, setError } =
+  const {
+    isAuthenticated,
+    isLoading,
+    isLoadingUsername,
+    isUsernameAvailable,
+    usernameError,
+    toastData,
+  } = useSelector((state) => state?.auth);
+  const { error, validateField, validateForm, clearFormError } =
     useFormValidator(FORM_CONFIG[formName]?.validator);
 
   useEffect(() => {
@@ -83,11 +100,19 @@ const Auth = () => {
   const handleInputChange = (e) => {
     let { name, value } = e.target;
     value = value.replace(/\s/g, '');
+    if (formData[name] === value) {
+      return;
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
-    validateField(name, value);
-
-    if (name === 'confirmPassword') {
-      validateCFPassword(value);
+    const errMsg = validateField(name, value);
+    if (name === 'username') {
+      if (!errMsg) {
+        debounce(() => {
+          dispatch(checkUsernameAvailable(value));
+        }, 400);
+      } else {
+        dispatch(setUsernameAvailable(false));
+      }
     }
   };
 
@@ -111,19 +136,9 @@ const Auth = () => {
     );
   };
 
-  const validateCFPassword = (value = formData.confirmPassword) => {
-    if (formName === FORM_CONFIG.SIGN_UP.name) {
-      if (!validateField('password', formData?.password)) {
-        const errorMsg = validateConfirmPassword(value, formData?.password);
-        setError((err) => ({ ...err, confirmPassword: errorMsg }));
-        return errorMsg;
-      }
-    }
-  };
-
   const handleSignButtonClick = async () => {
     const errors = validateForm(formData);
-    if (errors?.length || validateCFPassword()) {
+    if (errors?.length) {
       return;
     }
     if (formName === FORM_CONFIG.SIGN_IN.name) {
@@ -134,8 +149,12 @@ const Auth = () => {
         })
       );
     } else if (formName === FORM_CONFIG.SIGN_UP.name) {
+      if (usernameError?.length) {
+        return;
+      }
       dispatch(
         signUp({
+          username: formData.username,
           email: formData.email,
           password: formData.password,
         })
@@ -220,19 +239,27 @@ const Auth = () => {
           )}
           {formName === FORM_CONFIG.SIGN_UP.name && (
             <TextField
-              title={'Confirm Password'}
-              placeholder={'Enter confirm password'}
-              name={'confirmPassword'}
-              type={'password'}
-              value={formData?.confirmPassword}
+              title={'Username'}
+              placeholder={'Enter username'}
+              name={'username'}
+              value={formData?.username}
               onChange={handleInputChange}
-              error={error?.confirmPassword}
+              trailing={
+                isLoadingUsername ? (
+                  <Loader size='12px' borderWidth='4px' />
+                ) : (
+                  !error?.username &&
+                  isUsernameAvailable && <CheckCircle className='size-20' />
+                )
+              }
+              error={error?.username || usernameError}
               wrapperClass={styles.layout__form__textfieldWrapper}
             />
           )}
           <FlatButton
             text={FORM_CONFIG[formName]?.buttonText}
             onClick={handleSignButtonClick}
+            disabled={isLoadingUsername}
             className={classNames(
               styles.layout__form__btn,
               styles.layout__form__btn_signIn

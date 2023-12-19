@@ -3,6 +3,7 @@ export const REGEX = Object.freeze({
   PHONE: /^(\+\d{1,3}[- ]?)?\d{10}$/,
   URL: /^(https?:\/\/)?([\w.-]+)\.([a-zA-Z]{2,})(\/[^\s]*)?(\?[\w%.-]+=[\w%.-]+(&[\w%.-]+=[\w%.-]+)*)?$/,
   MILITARY_TIME: /^(?:[01]\d|2[0-3]):[0-5]\d$/,
+  ALPHANUMERIC: /^[A-Za-z0-9]*$/,
 });
 
 export const LOCALSTORAGE = Object.freeze({
@@ -12,10 +13,10 @@ export const LOCALSTORAGE = Object.freeze({
 
 export const TOAST_TYPE = Object.freeze({
   SUCCESS: 'success',
-  ERROR: 'error'
+  ERROR: 'error',
 });
 
 export const TOAST_INITIAL_DATA = {
   type: null,
-  message: null
-}
+  message: null,
+};
