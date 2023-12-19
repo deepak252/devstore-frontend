@@ -1,4 +1,5 @@
 @import './variables';
+
 body {
   margin: 0;
   background-color: $SURFACE;
@@ -16,12 +17,15 @@ code {
     monospace;
 }
 
-input, button{
+input,
+button {
   font-family: inherit;
 }
-.ml-8{
+
+.ml-8 {
   margin-left: 8px;
 }
+
 .size-16 {
   height: 16px;
   width: 16px;
@@ -32,12 +36,28 @@ input, button{
   width: 20px;
 }
 
-.size-24{
+.size-24 {
   height: 24px;
   width: 24px;
+}
+
+.size-28 {
+  height: 28px;
+  width: 28px;
+}
+
+
+.size-32 {
+  height: 32px;
+  width: 32px;
 }
 
 .size-36 {
   height: 36px;
   width: 36px;
+}
+
+.size-40 {
+  height: 40px;
+  width: 40px;
 }

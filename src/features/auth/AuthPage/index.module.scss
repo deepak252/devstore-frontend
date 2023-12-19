@@ -1,16 +1,17 @@
-@import '../../variables';
-@import '../../common';
+@import '../../../variables';
+@import '../../../common';
 
-.layout{
+.layout {
   background-color: $INVERSE_SURFACE;
   height: 100vh;
   width: 100vw;
   position: relative;
   overflow: hidden;
 
-  &__bg{
+  &__bg {
     height: 100%;
-    &__graphic{
+
+    &__graphic {
       position: absolute;
       left: 30%;
       top: 50%;
@@ -21,7 +22,8 @@
       transition: all 1s;
     }
   }
-  &__form{
+
+  &__form {
     position: absolute;
     left: 70%;
     top: 50%;
@@ -38,24 +40,26 @@
     box-shadow: 1px 1px 40px 2px $ON_PRIMARY_CONTAINER;
     transition: left 1s;
 
-    &__heading{
+    &__heading {
       // text-align: center;
       color: $GRAY_5;
     }
 
-    &__textfieldWrapper{
+    &__textfieldWrapper {
       margin-top: 16px;
     }
-    
-    &__btn{
+
+    &__btn {
       margin: 20px 0;
       width: 100%;
       font-size: 15px;
 
-      &_google, &_github{
+      &_google,
+      &_github {
         color: $GRAY_5;
         border: 1.5px solid $OUTLINE;
-        &__icon{
+
+        &__icon {
           height: 24px;
           width: 24px;
           margin: 0 12px;
@@ -63,53 +67,56 @@
       }
     }
 
-    &__forgotPasswordText{
+    &__forgotPasswordText {
       text-align: end;
       font-size: 14px;
-      span{
-        color: $PRIMARY;
-        cursor: pointer;
-      } 
-    }
 
-    &__message1{
-      text-align: center;
-      font-size: 14px;
-      span{
+      span {
         color: $PRIMARY;
         cursor: pointer;
       }
     }
 
-    &__divider{
+    &__message1 {
+      text-align: center;
+      font-size: 14px;
+
+      span {
+        color: $PRIMARY;
+        cursor: pointer;
+      }
+    }
+
+    &__divider {
       position: relative;
       width: 100%;
       border-top: 1px solid $GRAY_2;
       margin: 36px 0;
-      span{
+
+      span {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: $SURFACE;
-        padding: 0 10px; 
+        padding: 0 10px;
         color: $GRAY_4;
       }
     }
   }
 }
 
-@media #{$MEDIA_SCREEN_BELOW_MD}{
-  
-  .layout{
-    &__bg{
-      &__graphic{
+@media #{$MEDIA_SCREEN_BELOW_MD} {
+
+  .layout {
+    &__bg {
+      &__graphic {
         opacity: 0.7;
         left: 50%;
       }
     }
 
-    &__form{
+    &__form {
       left: 50%;
     }
   }

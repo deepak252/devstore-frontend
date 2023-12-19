@@ -10,13 +10,15 @@ $MEDIA_SCREEN_XM_TO_MD: 'only screen and (min-width: #{$MEDIA_SM}) and (max-widt
 $MEDIA_SCREEN_MD_TO_LG: 'only screen and (min-width: #{$MEDIA_MD}) and (max-width: #{$MEDIA_LG})';
 $MEDIA_SCREEN_ABOVE_LG: 'only screen and (min-width: #{$MEDIA_LG})';
 
-$MEDIA_SCREEN_BELOW_SM:  'only screen and (max-width: #{$MEDIA_SM})';
-$MEDIA_SCREEN_BELOW_MD:  'only screen and (max-width: #{$MEDIA_MD})';
-$MEDIA_SCREEN_BELOW_LG:  'only screen and (max-width: #{$MEDIA_LG})';
-$MEDIA_SCREEN_BELOW_XL:  'only screen and (max-width: #{$MEDIA_XL})';
+$MEDIA_SCREEN_BELOW_SM: 'only screen and (max-width: #{$MEDIA_SM})';
+$MEDIA_SCREEN_BELOW_MD: 'only screen and (max-width: #{$MEDIA_MD})';
+$MEDIA_SCREEN_BELOW_LG: 'only screen and (max-width: #{$MEDIA_LG})';
+$MEDIA_SCREEN_BELOW_XL: 'only screen and (max-width: #{$MEDIA_XL})';
 
 $Z_INDEX_NAVBAR: 999;
 $Z_INDEX_DROPDOWN: 500;
+$Z_INDEX_LOADER_MODAL: 10000;
+$Z_INDEX_MODAL: 10000;
 
 $PRIMARY: #646DDF; // Buttons, Active State (Checkbox), Textfield border (Focus)
 $ON_PRIMARY: #FFFFFF;
@@ -47,10 +49,10 @@ $ON_INVERSE_SURFACE: #FFFFFF;
 // val md_theme_light_inverseSurface = Color(303034)
 
 
-$GRAY_6:#404040;
-$GRAY_5:#565656;
-$GRAY_4:#767676;
-$GRAY_3:#a3a3a3;
+$GRAY_6: #404040;
+$GRAY_5: #565656;
+$GRAY_4: #767676;
+$GRAY_3: #a3a3a3;
 $GRAY_2: #c7c7c7;
 $GRAY_1: #e4e4e4;
 
@@ -115,4 +117,3 @@ $GRAY_1: #e4e4e4;
 // val md_theme_dark_surfaceVariant = Color(46464F)
 // val md_theme_dark_onSurfaceVariant = Color(C7C5D0)
 // val seed = Color(1D2473)
-

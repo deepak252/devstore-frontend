@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import styles from "./index.module.scss";
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import styles from './index.module.scss';
 
 const TextField = ({
   type,
@@ -16,7 +16,7 @@ const TextField = ({
   disabled,
   inputStyle,
   wrapperClass,
-  textfieldClass
+  textfieldClass,
 }) => {
   return (
     <div className={classNames(styles.container, wrapperClass)}>
@@ -38,7 +38,7 @@ const TextField = ({
       <p className={styles.container__error}>{error}</p>
     </div>
   );
-}
+};
 
 TextField.poptTypes = {
   type: PropTypes.string,
@@ -53,11 +53,11 @@ TextField.poptTypes = {
   inputStyle: PropTypes.object,
   wrapperClass: PropTypes.string,
   textfieldClass: PropTypes.string,
-}
+};
 
 TextField.defaultProps = {
   type: 'text',
-  autoFocus: false
-}
+  autoFocus: false,
+};
 
 export default TextField;

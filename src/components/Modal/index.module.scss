@@ -1,0 +1,33 @@
+@import '../../variables';
+@import '../../common';
+
+.container{
+  background-color: white;
+  padding: 12px;
+  border-radius: 20px;
+  max-width: 800px;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+
+  &__header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__content{
+    flex-grow: 1;
+    overflow: auto;
+  }
+  hr{
+    width: 100%;
+    background-color: $GRAY_1;
+    height: 1px;
+    border: none;
+  }
+  &__footer{
+    display: flex;
+    justify-content: flex-end;
+  }
+}
