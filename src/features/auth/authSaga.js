@@ -29,7 +29,7 @@ function* signInHandler(action) {
     }
   } catch (e) {
     console.error(e.message);
-    yield put(signInFailure(e.message || 'Something went wrong'));
+    yield put(signInFailure(e?.message || 'Something went wrong'));
   }
 }
 
@@ -48,7 +48,7 @@ function* signUpHandler(action) {
     }
   } catch (e) {
     console.error(e);
-    yield put(signUpFailure(e.message || 'Something went wrong'));
+    yield put(signUpFailure(e?.message || 'Something went wrong'));
   }
 }
 

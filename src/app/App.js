@@ -6,6 +6,7 @@ import Games from '../pages/Games';
 import Websites from '../pages/Websites';
 import Home from '../pages/Home';
 import Auth from '../features/auth/AuthPage';
+import UserProfile from '../features/user/UserProfile';
 import { useEffect } from 'react';
 import { setupInterceptor } from '../services/api';
 import { isSignedIn } from './cache';
@@ -31,6 +32,7 @@ function App() {
           <Route path='apps' element={<Apps />} />
           <Route path='games' element={<Games />} />
           <Route path='websites' element={<Websites />} />
+          <Route path='user/:username' element={<UserProfile />} />
         </Route>
         <Route
           path='/auth'

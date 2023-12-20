@@ -4,6 +4,9 @@ const initialState = {
   user: null,
   isLoading: false,
   error: null,
+  userProfile: null,
+  isLoadingUserProfile: false,
+  userProfileError: null,
 };
 
 const userSlice = createSlice({
@@ -25,10 +28,29 @@ const userSlice = createSlice({
     deleteUser: (state) => {
       state.user = null;
     },
+    getUserProfile: (state) => {
+      state.isLoadingUserProfile = true;
+    },
+    getUserProfileSuccess: (state, action) => {
+      state.userProfileError = null;
+      state.isLoadingUserProfile = false;
+      state.userProfile = action.payload?.data;
+    },
+    getUserProfileFailure: (state, action) => {
+      state.userProfileError = action.payload;
+      state.isLoadingUserProfile = false;
+    },
   },
 });
 
-export const { getUser, getUserSuccess, getUserFailure, deleteUser } =
-  userSlice.actions;
+export const {
+  getUser,
+  getUserSuccess,
+  getUserFailure,
+  deleteUser,
+  getUserProfile,
+  getUserProfileSuccess,
+  getUserProfileFailure,
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,0 +1,11 @@
+@import '../../../../variables';
+@import '../../../../common';
+
+.container{
+  padding: 0 12px;
+  border-radius: 8px;
+  height: calc(100vh - 105px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  margin-left: 12px;
+}

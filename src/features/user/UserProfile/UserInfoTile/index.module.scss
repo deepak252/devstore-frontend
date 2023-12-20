@@ -1,0 +1,43 @@
+@import '../../../../variables';
+@import '../../../../common';
+
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 1px solid $GRAY_2;
+  border-radius: 8px;
+  height: calc(100vh - 105px);
+  overflow-y: auto;
+  width: 220px;
+  box-sizing: border-box;
+
+  &__userInfo{
+    img[alt='avatar']{
+      box-sizing: border-box;
+      background-color: $GRAY_2;
+      opacity: 0.5;
+      padding: 12px;
+      border-radius: 12px;
+      width: 100%;
+    }
+  }
+
+  &__navigation{
+    @include disable-select;
+    &__item{
+      padding: 8px 12px;
+      background-color: $PRIMARY_CONTAINER;
+      margin: 4px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  }
+
+  hr{
+    width: 100%;
+    background-color: $GRAY_1;
+    height: 1px;
+    border: none;
+  }
+}
