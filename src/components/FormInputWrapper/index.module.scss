@@ -1,0 +1,15 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  margin-top: 14px;
+  &__title {
+    @include font-fourteen-bold;
+  }
+
+  &__error {
+    color: $ERROR;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+}

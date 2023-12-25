@@ -9,6 +9,13 @@ export const REGEX = Object.freeze({
 export const LOCALSTORAGE = Object.freeze({
   AUTH_TOKEN: 'authToken',
   USER: 'user',
+  METADATA: 'metadata',
+});
+
+export const ATTACHMENT_TYPE = Object.freeze({
+  IMAGE: 'image',
+  VIDEO: 'video',
+  DOCUMENT: 'document',
 });
 
 export const TOAST_TYPE = Object.freeze({
@@ -20,3 +27,8 @@ export const TOAST_INITIAL_DATA = {
   type: null,
   message: null,
 };
+
+export const FILE_EXTENSIONS = Object.freeze({
+  IMAGE: ['.jpg', '.jpeg', '.png'],
+  VIDEO: ['.mp4', '.avi', '.mkv', '.webm', '.3gp'],
+});

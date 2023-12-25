@@ -1,0 +1,39 @@
+@import "../../variables";
+@import '../../common';
+
+.container {
+    .target {
+        @include disable-select;
+        text-align: center;
+        padding: 20px;
+        border: 1px dashed $GRAY_3;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &__hintText {
+            @include font-fourteen;
+        }
+
+        &__hintDescription {
+            @include font-twelve-light;
+        }
+
+        &__dragEnter {
+            background-color: $SECONDARY_CONTAINER;
+        }
+
+        &:hover {
+            border: 1px dashed $PRIMARY;
+        }
+
+        &__disabled {
+            opacity: 0.7;
+            background-color: $GRAY_1;
+            border: 1px dashed $GRAY_3;
+            cursor: not-allowed;
+            &:hover {
+                border: 1px dashed $GRAY_3;
+            }
+        }
+    }
+}

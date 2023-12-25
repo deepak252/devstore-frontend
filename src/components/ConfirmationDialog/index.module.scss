@@ -1,0 +1,38 @@
+@import '../../variables';
+@import '../../common';
+
+.modal {
+  max-height: 80vh;
+  max-width: 80vw;
+  min-width: 300px;
+  border-radius: 0px;
+  padding: 12px 20px;
+  box-shadow: 1px 1px 20px 1px $GRAY_5;
+
+  &__title {
+    margin: 0.5em 0;
+  }
+
+  &__body {
+    @include font-fourteen;
+  }
+
+  hr {
+    width: 0;
+    background-color: transparent;
+    border: none;
+  }
+
+  &__btnConfirm {
+    @include button;
+    color: $ERROR_CONTAINER;
+    font-size: 15px;
+    margin-left: 12px
+  }
+
+  &__btnCancel {
+    @include button;
+    color: $PRIMARY;
+    font-size: 15px;
+  }
+}

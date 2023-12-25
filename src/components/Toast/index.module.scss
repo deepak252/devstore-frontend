@@ -17,15 +17,6 @@
     margin-right: 12px;
   }
 
-  &__closeIcon {
-    cursor: pointer;
-    border-radius: 50%;
-
-    path {
-      stroke: #FFF;
-    }
-  }
-
   &__error {
     background-color: $ERROR_CONTAINER;
     color: $ON_ERROR_CONTAINER;

@@ -38,7 +38,7 @@ const Modal = ({
               )}
             </div>
             <div className={styles.container__content}>{children}</div>
-            <hr />
+            {footer && <hr />}
             <div className={styles.container__footer}>{footer}</div>
           </div>
         </ModalWrapper>

@@ -41,7 +41,8 @@ const Toast = ({
           <span>{message}</span>
           <CloseIcon
             onClick={closeToast}
-            className={classNames('size-28', styles.container__closeIcon)}
+            fill='white'
+            className='size-24 c-pointer'
           />
         </div>
       )}

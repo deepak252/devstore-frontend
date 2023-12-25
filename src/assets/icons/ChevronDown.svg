@@ -1,23 +1,11 @@
 <svg
-  fill="#565656"
-  height="64px"
-  width="64px"
-  version="1.1"
-  id="Layer_1"
   xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 407.437 407.437"
-  xml:space="preserve"
+  height="24px"
+  viewBox="0 0 24 24"
+  width="24px"
+  fill="#565656"
 >
-  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-  <g
-    id="SVGRepo_tracerCarrier"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  ></g>
-  <g id="SVGRepo_iconCarrier">
-    <polygon
-      points="386.258,91.567 203.718,273.512 21.179,91.567 0,112.815 203.718,315.87 407.437,112.815 "
-    ></polygon>
-  </g>
+  <path
+    d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"
+  />
 </svg>

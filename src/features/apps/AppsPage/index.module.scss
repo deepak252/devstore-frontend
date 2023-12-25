@@ -1,0 +1,22 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container{
+  height: 200vh;
+
+  &__gridItems{
+    
+    // grid-template-columns: repeat(10, 1fr);
+  }
+
+  &__btnCreateApp{
+    @include fab-fixed;
+    height: 46px;
+    width: 46px;
+    &__icon {
+      height: 40px;
+      width: 40px;
+      fill: $ON_PRIMARY_CONTAINER;
+    }
+  }
+}

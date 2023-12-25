@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import AuthNavbar from './AuthNavbar';
-import TextField from '../../../components/TextField';
+import TextInput from '../../../components/TextInput';
 import FlatButton from '../../../components/Buttons/FlatButton';
 import OutlinedButton from '../../../components/Buttons/OutlinedButton';
 import LoaderModal from '../../../components/Modal/LoaderModal';
@@ -12,7 +12,7 @@ import Loader from '../../../components/Loader';
 import { ReactComponent as BGAuth } from '../../../assets/images/BG_Auth.svg';
 import { ReactComponent as GoogleIcon } from '../../../assets/icons/Google.svg';
 import { ReactComponent as GithubIcon } from '../../../assets/icons/Github.svg';
-import { ReactComponent as CheckCircle } from '../../../assets/icons/CheckCircleGreen.svg';
+import { ReactComponent as CheckCircleIcon } from '../../../assets/icons/CheckCircle.svg';
 import useFormValidator from '../../../hooks/useFormValidator';
 import {
   validateEmail,
@@ -206,17 +206,16 @@ const Auth = () => {
             <span>OR</span>
           </div>
           {FORM_CONFIG.SIGN_IN.name === formName ? (
-            <TextField
+            <TextInput
               title={'Username or Email'}
               placeholder={'Enter username or email'}
               name={'usernameOrEmail'}
               value={formData?.usernameOrEmail}
               onChange={handleInputChange}
               error={error?.usernameOrEmail}
-              wrapperClass={styles.layout__form__textfieldWrapper}
             />
           ) : (
-            <TextField
+            <TextInput
               title={'Email'}
               placeholder={'Enter email'}
               name={'email'}
@@ -224,13 +223,12 @@ const Auth = () => {
               value={formData?.email}
               onChange={handleInputChange}
               error={error?.email}
-              wrapperClass={styles.layout__form__textfieldWrapper}
             />
           )}
           {[FORM_CONFIG.SIGN_IN.name, FORM_CONFIG.SIGN_UP.name].includes(
             formName
           ) && (
-            <TextField
+            <TextInput
               title={'Password'}
               placeholder={'Enter password'}
               name={'password'}
@@ -238,7 +236,6 @@ const Auth = () => {
               value={formData?.password}
               onChange={handleInputChange}
               error={error?.password}
-              wrapperClass={styles.layout__form__textfieldWrapper}
             />
           )}
           {formName === FORM_CONFIG.SIGN_IN.name && (
@@ -251,7 +248,7 @@ const Auth = () => {
             </p>
           )}
           {formName === FORM_CONFIG.SIGN_UP.name && (
-            <TextField
+            <TextInput
               title={'Username'}
               placeholder={'Enter username'}
               name={'username'}
@@ -262,11 +259,10 @@ const Auth = () => {
                   <Loader size='12px' borderWidth='4px' />
                 ) : (
                   !error?.username &&
-                  isUsernameAvailable && <CheckCircle className='size-20' />
+                  isUsernameAvailable && <CheckCircleIcon className='size-20' />
                 )
               }
               error={error?.username || usernameError}
-              wrapperClass={styles.layout__form__textfieldWrapper}
             />
           )}
           <FlatButton

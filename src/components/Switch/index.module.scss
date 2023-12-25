@@ -1,0 +1,59 @@
+@import '../../variables';
+@import '../../common';
+
+$TRACK_WIDTH: 46px;
+$THUMB_SIZE: 24px;
+$TRANSLATE_L: -6px;
+$TRANSLATE_R: calc($TRACK_WIDTH - $THUMB_SIZE/2 + $TRANSLATE_L);
+
+.container {
+  @include flex-container;
+  position: relative;
+  height: 18px;
+  width: $TRACK_WIDTH;
+  background-color: $GRAY_2;
+  border-radius: 100px;
+  margin: 12px 8px;
+  cursor: pointer;
+
+  &__track {
+    background-color: $PRIMARY_CONTAINER;
+    height: inherit;
+    width: 0;
+    border-radius: inherit;
+    transition: 0.5s;
+
+    &_active {
+      width: inherit;
+    }
+  }
+
+  &__thumb {
+    position: absolute;
+    width: $THUMB_SIZE;
+    height: $THUMB_SIZE;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 0 2px 2px $GRAY_OPACITY;
+    transform: translateX($TRANSLATE_L);
+    transition: 0.5s;
+
+    &_active {
+      background-color: $PRIMARY;
+      transform: translateX($TRANSLATE_R);
+    }
+
+    &:hover {
+      box-shadow: 0 0 0px 6px $GRAY_OPACITY;
+    }
+  }
+  
+  &_disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    .container__thumb {
+      box-shadow: 0 0 2px 2px $GRAY_OPACITY;
+    }
+  }
+
+}

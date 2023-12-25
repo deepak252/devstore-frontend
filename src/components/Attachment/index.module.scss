@@ -1,0 +1,42 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  @include flex-container;
+  display: inline-flex;
+  padding: 8px;
+  margin: 4px 6px 4px 0;
+  box-shadow: 0 0 2px 1px $GRAY_1;
+  border-radius: 12px;
+  box-sizing: border-box;
+
+  &__content{
+    @include flex-container;
+    flex-grow: 1;
+    overflow: hidden;
+    &__icon {
+      height: 36px;
+      width: 36px;
+      margin-right: 6px;
+      fill: $GRAY_4;
+    }
+  
+    &__info {
+      overflow: hidden;
+      flex-grow: 1;
+      margin-right: 8px;
+      &__title {
+        @include overflow-ellipsis;
+        @include font-fourteen;
+        margin: 0;
+      }
+  
+      &__subtitle {
+        @include font-twelve;
+        margin: 0;
+      }
+    }
+  }
+
+
+}

@@ -1,57 +1,15 @@
 <svg
-  fill="#565656"
-  width="64px"
-  height="64px"
-  viewBox="0 0 24 24"
-  id="sign-out-left-2"
-  data-name="Flat Line"
   xmlns="http://www.w3.org/2000/svg"
-  class="icon flat-line"
+  enable-background="new 0 0 24 24"
+  height="24px"
+  viewBox="0 0 24 24"
+  width="24px"
+  fill="#565656"
 >
-  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-  <g
-    id="SVGRepo_tracerCarrier"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  ></g>
-  <g id="SVGRepo_iconCarrier">
-    <polyline
-      id="primary"
-      points="6 15 3 12 6 9"
-      style="
-        fill: none;
-        stroke: #565656;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 2;
-      "
-    ></polyline>
-    <line
-      id="primary-2"
-      data-name="primary"
-      x1="3"
-      y1="12"
-      x2="17"
-      y2="12"
-      style="
-        fill: none;
-        stroke: #565656;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 2;
-      "
-    ></line>
-    <path
-      id="primary-3"
-      data-name="primary"
-      d="M10,8V5a1,1,0,0,1,1-1h9a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H11a1,1,0,0,1-1-1V16"
-      style="
-        fill: none;
-        stroke: #565656;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke-width: 2;
-      "
-    ></path>
-  </g>
+  <path
+    d="M5,5h6c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h6c0.55,0,1-0.45,1-1v0 c0-0.55-0.45-1-1-1H5V5z"
+  />
+  <path
+    d="M20.65,11.65l-2.79-2.79C17.54,8.54,17,8.76,17,9.21V11h-7c-0.55,0-1,0.45-1,1v0c0,0.55,0.45,1,1,1h7v1.79 c0,0.45,0.54,0.67,0.85,0.35l2.79-2.79C20.84,12.16,20.84,11.84,20.65,11.65z"
+  />
 </svg>

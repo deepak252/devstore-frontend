@@ -6,7 +6,7 @@ import NavbarOptions from './NavbarOptions';
 import Dropdown from '../Dropdown';
 import Shimmer from '../Shimmer';
 import { ReactComponent as SearchIcon } from '../../assets/icons/Search.svg';
-import { ReactComponent as UserIcon } from '../../assets/icons/User.svg';
+import { ReactComponent as AccountIcon } from '../../assets/icons/Account.svg';
 import { ReactComponent as SignInIcon } from '../../assets/icons/SignIn.svg';
 import { ReactComponent as SignOutIcon } from '../../assets/icons/SignOut.svg';
 import { ReactComponent as ProfileIcon } from '../../assets/icons/Profile.svg';
@@ -15,7 +15,7 @@ import { ReactComponent as BookmarksIcon } from '../../assets/icons/Bookmarks.sv
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { deleteUser } from '../../features/user/userSlice';
 import { signOut } from '../../features/auth/authSlice';
-import { clearCache } from '../../app/cache';
+import { clearUserCache } from '../../app/cache';
 import styles from './index.module.scss';
 
 const Navbar = ({ children }) => {
@@ -70,7 +70,7 @@ const Navbar = ({ children }) => {
       case 'signOut': {
         dispatch(signOut());
         dispatch(deleteUser());
-        clearCache();
+        clearUserCache();
         break;
       }
       default: {
@@ -96,7 +96,7 @@ const Navbar = ({ children }) => {
             onChange={handleOptionSelect}
           >
             <IconButton
-              icon={<UserIcon className='size-36' />}
+              icon={<AccountIcon className='size-36' />}
               className={styles.navbar__actions__iconButton}
             />
           </Dropdown>

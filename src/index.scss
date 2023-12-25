@@ -18,12 +18,34 @@ code {
 }
 
 input,
-button {
+button,
+textarea {
   font-family: inherit;
 }
 
-.ml-8 {
+.c-pointer{
+  cursor: pointer;
+}
+
+.c-disabled{
+  cursor: not-allowed;
+}
+
+.d-none {
+  display: none;
+}
+
+.ml-8{
   margin-left: 8px;
+}
+.mr-8{
+  margin-right: 8px;
+}
+.mt-8{
+  margin-top: 8px;
+}
+.mb-8{
+  margin-bottom: 8px;
 }
 
 .size-16 {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { clearCache, getAuthToken } from '../app/cache';
+import { clearUserCache, getAuthToken } from '../app/cache';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -14,9 +14,10 @@ export const setupInterceptor = (navigate) => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
+      // console.log(error.config.url);
       const statusCode = error.response?.status;
       if (statusCode === 401) {
-        clearCache();
+        clearUserCache();
         navigate('/auth');
       }
       return Promise.reject(error);
@@ -53,7 +54,7 @@ export const getRequest = async (
 
 export const postRequest = async (
   endpoint = '',
-  { queryParams, data, headers = {} } = {}
+  { queryParams, data, headers = {}, onUploadProgress, onDownloadProgress, ...args } = {}
 ) => {
   const queryString = getQueryString(queryParams);
   const authToken = getAuthToken();
@@ -63,6 +64,9 @@ export const postRequest = async (
         Authorization: authToken,
         ...headers,
       },
+      onUploadProgress,
+      onDownloadProgress,
+      ...args
     })
     .then((response) => response)
     .catch((error) => error.response);

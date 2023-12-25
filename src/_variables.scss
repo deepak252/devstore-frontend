@@ -32,14 +32,12 @@ $ON_SECONDARY_CONTAINER: #191A2C;
 $TERTIARY: #78536B;
 $ON_TERTIARY: #FFFFFF;
 
-$OUTLINE: #777680; // Border: Chip,Outline Button, Text Field (unfocus)
-
 $ERROR: #BA1A1A;
 $ON_ERROR: #FFFFFF;
 $ERROR_CONTAINER: #FA4733;
 $ON_ERROR_CONTAINER: #FFFFFF;
 
-$SUCCESS: #2fba1a;
+$SUCCESS: #2FBA1A;
 $ON_SUCCESS: #FFFFFF;
 $SUCCESS_CONTAINER: #49B638;
 $ON_SUCCESS_CONTAINER: #FFFFFF;
@@ -59,7 +57,7 @@ $GRAY_4: #767676;
 $GRAY_3: #a3a3a3;
 $GRAY_2: #c7c7c7;
 $GRAY_1: #e4e4e4;
-
+$GRAY_OPACITY: #80808046
 //********** 3. Indigo
 // val md_theme_light_primary = Color(4F56A9)
 // val md_theme_light_onPrimary = Color(FFFFFF)

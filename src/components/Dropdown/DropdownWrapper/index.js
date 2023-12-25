@@ -1,14 +1,15 @@
-import { useEffect, useRef } from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import DropdownTarget from "../DropdownTarget";
-import styles from "./index.module.scss";
+import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import DropdownTarget from '../DropdownTarget';
+import styles from './index.module.scss';
 
 const DropdownWrapper = ({
   isOpen,
   setIsOpen,
   target,
   children,
+  labelChips,
   className,
   contentClass,
   targetClass,
@@ -21,9 +22,9 @@ const DropdownWrapper = ({
         setIsOpen && setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [setIsOpen]);
 
@@ -36,6 +37,7 @@ const DropdownWrapper = ({
             setIsOpen && setIsOpen(!isOpen);
           }}
           className={classNames(styles.container__target, targetClass)}
+          labelChips={labelChips}
         >
           {target}
         </DropdownTarget>
@@ -53,6 +55,7 @@ DropdownWrapper.propTypes = {
   isOpen: PropTypes.bool,
   setIsOpen: PropTypes.any,
   target: PropTypes.node,
+  labelChips: PropTypes.any,
   className: PropTypes.string,
   contentClass: PropTypes.string,
   targetClass: PropTypes.string,

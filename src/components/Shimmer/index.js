@@ -25,7 +25,7 @@ const Shimmer = ({
   );
 };
 
-Shimmer.poptTypes = {
+Shimmer.propTypes = {
   height: PropTypes.string,
   width: PropTypes.string,
   borderRadius: PropTypes.string,

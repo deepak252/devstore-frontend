@@ -1,0 +1,16 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container {
+  @include absolute-center;
+  text-align: center;
+  width: 90%;
+
+  img[alt='error'] {
+    width: 600px;
+    max-width: 80vw;
+  }
+  p {
+    @include font-sixteen-light;
+  }
+}

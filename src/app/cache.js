@@ -25,4 +25,20 @@ export const getCachedUser = () => {
   }
 };
 
-export const clearCache = () => localStorage.clear();
+export const cacheMetadata = (metadata) => {
+  if (!metadata) return;
+  localStorage.setItem(LOCALSTORAGE.METADATA, JSON.stringify(metadata));
+};
+
+export const getCachedMetadata = () => {
+  try {
+    return JSON.parse(localStorage.getItem(LOCALSTORAGE.METADATA));
+  } catch (e) {
+    return null;
+  }
+};
+
+export const clearUserCache = () =>{
+  localStorage.removeItem(LOCALSTORAGE.USER);
+  localStorage.removeItem(LOCALSTORAGE.AUTH_TOKEN);
+};
