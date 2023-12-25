@@ -1,0 +1,30 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container {
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+
+  &__target {
+    @include flex-container;
+    @include disable-select;
+
+    border: 1px solid $GRAY_3;
+    border-radius: 12px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: $GRAY_4;
+
+    &__content {
+      flex-grow: 1;
+      padding: 2px 5px 2px 0;
+
+      span.placeholder {
+        display: inline-block;
+        margin: 8px 6px 8px 0;
+      }
+    }
+  }
+}

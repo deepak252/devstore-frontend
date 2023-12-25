@@ -8,6 +8,11 @@
     max-width: 1200px;
     margin-top: 70px;
     margin-top: 70px;
+
+    &__loader{
+      @include absolute-center;
+    }
+
   }
 }
 

@@ -1,0 +1,65 @@
+@import '../../../variables';
+@import '../../../common';
+
+.modal {
+  width: 80vw;
+  max-height: 80vh;
+  min-height: 50vh;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    h3 {
+      line-height: 20px;
+      padding: 0 12px;
+    }
+  }
+
+  &__content {
+    padding: 0 24px 12px;
+
+    &__switch{
+      @include flex-center;
+      justify-content: flex-end;
+      span{
+        @include font-sixteen-bold;
+        margin-left: 8px;
+      }
+    }
+
+
+    &__dropdownWrapper {
+      min-width: 50%;
+    }
+
+    &__dropdownOptions {
+      width: 100%;
+      max-width: 350px;
+    }
+
+    .attachmentApp{
+      width: 100%;
+    }
+
+    .uploadedAppInfo{
+      margin-top: 12px;
+      p{
+        @include overflow-ellipsis;
+        @include font-twelve-light;
+        margin: 0.2em;
+        span{
+          @include font-twelve-bold;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+  }
+}
+
+@media #{$MEDIA_SCREEN_BELOW_MD} {}

@@ -1,0 +1,33 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container{
+  @include flex-container;
+  cursor: pointer;
+  font-size: 14px;
+  color: $GRAY_6;
+  border-radius: 8px;
+  border: 1px solid $SURFACE;
+
+  span{
+    @include overflow-ellipsis;
+    padding: 8px;
+    flex-grow: 1;
+  }
+
+  &__selected{
+    padding-right: 2px;
+    span{
+      color: $PRIMARY;
+    }
+  }
+
+  &__disabled{
+    opacity: 0.5;
+    cursor: not-allowed,
+  }
+
+  &:hover{
+    background-color: $SECONDARY_CONTAINER;
+  }
+}

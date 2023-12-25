@@ -3,8 +3,6 @@
 
 .container{
   @include button;
-  @include flex-center;
-  
   color: $PRIMARY;
   border: 1.5px solid $PRIMARY;
   padding: 12px 24px;

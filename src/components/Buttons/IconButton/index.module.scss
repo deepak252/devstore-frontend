@@ -2,13 +2,12 @@
 @import '../../../common';
 
 .container{
-  @include flex-center;
-  @include disable-select;
+  @include button;
+  box-sizing:content-box;
   padding: 4px;
   border-radius: 100%;
 
   &:hover{
-    cursor: pointer;
     background-color: $GRAY_1;
   }
   &:active{

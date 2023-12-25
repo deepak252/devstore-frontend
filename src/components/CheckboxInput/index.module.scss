@@ -1,0 +1,30 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  display: inline-block;
+  &__title {
+    @include font-fourteen;
+  }
+  &__subtitle {
+    @include font-twelve-light;
+  }
+
+  &__checkbox {
+    @include flex-container;
+    border-radius: 12px;
+    input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      accent-color: $PRIMARY;
+      cursor: pointer;
+    }
+  }
+
+  &__error {
+    color: $ERROR;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+}

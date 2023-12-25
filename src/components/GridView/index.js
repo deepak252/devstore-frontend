@@ -9,9 +9,9 @@ const GridView = ({
   itemsClass
 }) => {
   return (
-    <div className={classNames(styles.gridViewContainer, wrapperClass)}>
+    <div className={classNames(styles.container, wrapperClass)}>
       <h3>{heading}</h3>
-      <div className={classNames(styles.gridViewContainer__items, itemsClass)}>
+      <div className={classNames(styles.container__items, itemsClass)}>
         {items}
       </div>
     </div>

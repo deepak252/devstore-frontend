@@ -1,28 +1,113 @@
 @import './variables';
-@mixin font-twelve-light($color: $GRAY_4){
+
+@mixin font-twelve($color: $GRAY_5) {
   font-size: 12px;
   color: $color;
+  margin: 0.6em 0;
 }
 
-@mixin font-fourteen-light($color: $GRAY_4){
+@mixin font-twelve-light($color: $GRAY_4) {
+  font-size: 12px;
+  color: $color;
+  margin: 0.6em 0;
+}
+
+@mixin font-twelve-bold($color: $GRAY_5) {
+  font-size: 12px;
+  color: $color;
+  margin: 0.6em 0;
+  font-weight: bold;
+}
+
+@mixin font-twelve-dark($color: $GRAY_6) {
+  font-size: 12px;
+  color: $color;
+  margin: 0.6em 0;
+}
+
+
+@mixin font-thirteen($color: $GRAY_5) {
+  font-size: 13px;
+  color: $color;
+  margin: 0.6em 0;
+}
+
+@mixin font-thirteen-light($color: $GRAY_4) {
+  font-size: 13px;
+  color: $color;
+  margin: 0.6em 0;
+}
+
+@mixin font-thirteen-bold($color: $GRAY_5) {
+  font-size: 13px;
+  color: $color;
+  font-weight: bold;
+  margin: 0.6em 0;
+}
+
+
+@mixin font-fourteen($color: $GRAY_5) {
   font-size: 14px;
   color: $color;
+  margin: 0.6em 0;
 }
-@mixin flex-container{
+
+@mixin font-fourteen-light($color: $GRAY_4) {
+  font-size: 14px;
+  color: $color;
+  margin: 0.6em 0;
+}
+
+@mixin font-fourteen-bold($color: $GRAY_5) {
+  font-size: 14px;
+  color: $color;
+  font-weight: bold;
+  margin: 0.6em 0;
+}
+
+@mixin font-sixteen($color: $GRAY_5) {
+  font-size: 16px;
+  color: $color;
+  margin: 0.6em 0;
+}
+
+@mixin font-sixteen-light($color: $GRAY_4) {
+  font-size: 16px;
+  color: $color;
+  margin: 0.6em 0;
+}
+@mixin font-sixteen-bold($color: $GRAY_6) {
+  font-size: 16px;
+  color: $color;
+  margin: 0.6em 0;
+  font-weight: bold;
+}
+
+
+@mixin flex-container {
   display: flex;
   align-items: center;
 }
 
-@mixin flex-center{
+@mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+@mixin absolute-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 @mixin disable-select {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
 }
 
 @mixin overflow-ellipsis {
@@ -31,16 +116,44 @@
   text-overflow: ellipsis;
 }
 
-@mixin button{
+@mixin button {
   @include disable-select;
+  @include flex-center;
+  font-size: 13px;
   border: none;
   outline: none;
   background-color: transparent;
   border-radius: 12px;
   cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+}
+
+@mixin floating-action-button {
+  background-color: $PRIMARY_CONTAINER;
+  border-radius: 20px;
+  box-shadow: 1px 1px 3px 1px $GRAY_2;
+  padding: 20px;
+
+  &:hover{
+    background-color: #d0d0f6 ;
+  }
+}
+
+@mixin fab-fixed {
+  @include floating-action-button;
+  position: fixed;
+  bottom: 36px;
+  right: 36px;
+
+  @media #{$MEDIA_SCREEN_BELOW_SM} {
+    bottom: 24px;
+    right: 24px;
+    padding: 16px;
   }
 }

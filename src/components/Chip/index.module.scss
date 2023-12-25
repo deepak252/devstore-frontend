@@ -1,0 +1,27 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  @include disable-select;
+  @include font-fourteen;
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  border-radius: 100px;
+  padding: 6px 12px;
+  border: 1px solid $GRAY_2;
+  color: $GRAY_5;
+
+  span {
+    padding: 0 6px;
+  }
+
+  &__selected {
+    background-color: $SECONDARY_CONTAINER;
+    border: 1px solid $PRIMARY;
+    color: $PRIMARY;
+    font-weight: bold;
+
+  }
+
+}

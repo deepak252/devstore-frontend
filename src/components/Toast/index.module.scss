@@ -1,0 +1,30 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  @include flex-container;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: $Z_INDEX_TOAST;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #646464cb;
+  color: #FFF;
+
+  span {
+    margin-right: 12px;
+  }
+
+  &__error {
+    background-color: $ERROR_CONTAINER;
+    color: $ON_ERROR_CONTAINER;
+  }
+
+  &__success {
+    background-color: $SUCCESS_CONTAINER;
+    color: $ON_ERROR_CONTAINER;
+  }
+
+}

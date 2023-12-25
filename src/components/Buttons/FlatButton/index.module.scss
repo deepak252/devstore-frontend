@@ -3,7 +3,6 @@
 
 .container{
   @include button;
-  @include flex-center;
 
   background-color: $PRIMARY;
   color: $ON_PRIMARY;
