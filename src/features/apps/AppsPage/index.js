@@ -22,10 +22,10 @@ const Apps = () => {
   const toastData = useSelector((state) => state.apps?.toastData);
   const user = useSelector((state) => state?.user?.user);
   const isCreateAppFormOpen = useSelector(
-    (state) => state.apps?.isCreateAppFormOpen
+    (state) => state.apps?.createAppForm?.isOpen
   );
   const isCreateAppFormMinimize = useSelector(
-    (state) => state.apps?.isCreateAppFormMinimize
+    (state) => state.apps?.createAppForm?.isMinimize
   );
 
   const appList = [
@@ -91,7 +91,10 @@ const Apps = () => {
         // icon={<AddIcon className={styles.container__btnCreateApp__icon} />}
         icon={
           isCreateAppFormMinimize ? (
-            <EditIcon className={styles.container__btnCreateApp__icon} style={{height:'30px', width:'30px'}}/>
+            <EditIcon
+              className={styles.container__btnCreateApp__icon}
+              style={{ height: '30px', width: '30px' }}
+            />
           ) : (
             <AddIcon className={styles.container__btnCreateApp__icon} />
           )

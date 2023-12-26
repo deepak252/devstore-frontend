@@ -16,17 +16,27 @@ const formDataInitialState = {
 };
 
 const initialState = {
-  topApps: [],
-  isLoading: false,
-  isCreateAppFormOpen: false,
-  isCreateAppFormMinimize: false,
-  createAppFormData: formDataInitialState,
-  isLoadingCreateAppForm: false,
-  createAppError: null,
-  uploadedAppInfo: null,
-  isUploadingApp: false,
-  uploadAppProgress: null,
-  uploadAppError: null,
+  allApps: {
+    list: [],
+    pageNumber: 0,
+    pageSize: 0,
+    totalResults: 0,
+    isLoading: false,
+    error: null,
+  },
+  createAppForm: {
+    formData: formDataInitialState,
+    isOpen: false,
+    isMinimize: false,
+    isLoading: false,
+    error: null,
+  },
+  uploadApp: {
+    appInfo: null,
+    isLoading: false,
+    progress: null,
+    error: null,
+  },
   toastData: TOAST_INITIAL_DATA,
 };
 
@@ -34,65 +44,76 @@ const appsSlice = createSlice({
   name: 'apps',
   initialState,
   reducers: {
-    getApps: (state, action) => {},
-    getAppsSuccess: (state, action) => {},
-    getAppsFailure: (state, action) => {},
+    getApps: (state, action) => {
+      state.allApps.isLoading = true;
+    },
+    getAppsSuccess: (state, action) => {
+      state.allApps.isLoading = false;
+      state.allApps.error = null;
+    },
+    getAppsFailure: (state, action) => {
+      state.allApps.isLoading = false;
+    },
     toggleCreateAppFormOpen: (state) => {
-      state.isCreateAppFormOpen = !state.isCreateAppFormOpen;
-      if (!state.isCreateAppFormOpen) {
+      state.createAppForm.isOpen = !state.createAppForm.isOpen;
+      if (!state.createAppForm.isOpen) {
         // Form Closed
-        state.isCreateAppFormMinimize = false;
-        state.createAppFormData = formDataInitialState;
+        state.createAppForm.isMinimize = false;
+        state.createAppForm.formData = formDataInitialState;
       }
     },
     toggleCreateAppFormMinimize: (state) => {
-      state.isCreateAppFormMinimize = !state.isCreateAppFormMinimize;
+      state.createAppForm.isMinimize = !state.createAppForm.isMinimize;
     },
     setCreateAppFormData: (state, action) => {
-      state.createAppFormData = action.payload;
+      state.createAppForm.formData = action.payload;
     },
     createApp: (state, action) => {
-      state.isLoadingCreateAppForm = true;
-      state.createAppError = null;
+      state.createAppForm.isLoading = true;
+      state.createAppForm.error = null;
     },
     createAppSuccess: (state, action) => {
-      state.isLoadingCreateAppForm = false;
-      state.createAppError = null;
+      state.createAppForm.isLoading = false;
+      state.createAppForm.error = null;
     },
     createAppFailure: (state, action) => {
-      state.isLoadingCreateAppForm = false;
-      state.createAppError = action.payload;
+      state.createAppForm.isLoading = false;
+      state.createAppForm.error = action.payload;
     },
     createAppCancelled: (state, action) => {
-      state.isLoadingCreateAppForm = false;
-      state.createAppError = null;
+      state.createAppForm.isLoading = false;
+      state.createAppForm.error = null;
       console.log('createAppCancelled');
     },
     uploadApp: (state, action) => {
-      state.isUploadingApp = true;
-      state.uploadAppError = null;
-      state.uploadedAppInfo = null;
+      state.uploadApp.isLoading = true;
+      state.uploadApp.error = null;
+      state.uploadApp.appInfo = null;
     },
     uploadAppProgress: (state, action) => {
-      state.uploadAppProgress = action.payload;
+      state.uploadApp.progress = action.payload;
     },
     uploadAppSuccess: (state, action) => {
-      state.uploadAppError = null;
-      state.isUploadingApp = false;
-      state.uploadedAppInfo = action.payload?.data;
+      state.uploadApp.error = null;
+      state.uploadApp.isLoading = false;
+      state.uploadApp.appInfo = action.payload?.data;
     },
     uploadAppCancelled: (state, action) => {
-      state.isUploadingApp = false;
-      state.uploadAppError = null;
-      state.uploadedAppInfo = null;
-      state.uploadAppProgress = null;
+      state.uploadApp = {
+        appInfo: null,
+        isLoading: false,
+        progress: null,
+        error: null,
+      };
       console.log('uploadAppCancelled');
     },
     uploadAppFailure: (state, action) => {
-      state.isUploadingApp = false;
-      state.uploadedAppInfo = null;
-      state.uploadAppProgress = null;
-      state.uploadAppError = action.payload;
+      state.uploadApp = {
+        appInfo: null,
+        isLoading: false,
+        progress: null,
+        error: action.payload,
+      };
       state.toastData = {
         type: TOAST_TYPE.ERROR,
         message: action.payload,

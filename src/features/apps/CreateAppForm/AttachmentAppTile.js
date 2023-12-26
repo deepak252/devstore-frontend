@@ -9,10 +9,12 @@ import { ATTACHMENT_TYPE } from '../../../constants';
 
 const AttachmentAppTile = ({ attachmentFile, onRemove, className }) => {
   const uploadAppProgress = useSelector(
-    (state) => state.apps?.uploadAppProgress
+    (state) => state.apps?.uploadApp?.progress
   );
-  const uploadAppError = useSelector((state) => state.apps?.uploadAppError);
-  const isUploadingApp = useSelector((state) => state.apps?.isUploadingApp);
+  const uploadAppError = useSelector((state) => state.apps?.uploadApp?.error);
+  const isUploadingApp = useSelector(
+    (state) => state.apps?.uploadApp?.isLoading
+  );
   const getUploadProgress = () => {
     if (!uploadAppProgress) {
       return '';

@@ -48,8 +48,10 @@ const CreateAppForm = () => {
   );
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
-  const formData = useSelector((state) => state.apps?.createAppFormData);
-  const uploadedAppInfo = useSelector((state) => state.apps?.uploadedAppInfo);
+  const formData = useSelector((state) => state.apps?.createAppForm?.formData);
+  const uploadedAppInfo = useSelector(
+    (state) => state.apps?.uploadApp?.appInfo
+  );
   const { error, validateField, validateForm, clearFormError } =
     useFormValidator(appFormValidator);
   const isIos = formData?.isIos;
