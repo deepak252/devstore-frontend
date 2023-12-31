@@ -1,0 +1,11 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  padding: 12px 8px;
+  display: grid;
+  // grid-auto-columns: 170px;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  justify-content: start;
+}

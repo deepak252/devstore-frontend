@@ -8,7 +8,7 @@ const AppLogo = ({ showText, className, pointerDisabled }) => {
   return (
     <div className={classNames(styles.logo, className)}>
       <NavLink
-        to='/apps'
+        to='/'
         onClick={(e) => pointerDisabled && e.preventDefault()}
         style={{ pointerEvents: pointerDisabled && 'none' }}
       >

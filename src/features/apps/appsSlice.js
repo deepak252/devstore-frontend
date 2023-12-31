@@ -18,9 +18,14 @@ const formDataInitialState = {
 const initialState = {
   allApps: {
     list: [],
-    pageNumber: 0,
-    pageSize: 0,
+    pageNumber: 1,
+    pageSize: 10,
     totalResults: 0,
+    isLoading: false,
+    error: null,
+  },
+  appDetails: {
+    data: null,
     isLoading: false,
     error: null,
   },
@@ -37,6 +42,11 @@ const initialState = {
     progress: null,
     error: null,
   },
+  banner: {
+    list: [],
+    isLoading: false,
+    error: null,
+  },
   toastData: TOAST_INITIAL_DATA,
 };
 
@@ -44,18 +54,32 @@ const appsSlice = createSlice({
   name: 'apps',
   initialState,
   reducers: {
-    getApps: (state, action) => {
+    getAllApps: (state, action) => {
       state.allApps.isLoading = true;
     },
-    getAppsSuccess: (state, action) => {
+    getAllAppsSuccess: (state, action) => {
       state.allApps.isLoading = false;
       state.allApps.error = null;
+      state.allApps.list = action.payload?.data?.apps;
     },
-    getAppsFailure: (state, action) => {
+    getAllAppsFailure: (state, action) => {
       state.allApps.isLoading = false;
+      state.allApps.error = action.payload;
+    },
+    getAppDetails: (state, action) => {
+      state.appDetails.isLoading = true;
+    },
+    getAppDetailsSuccess: (state, action) => {
+      state.appDetails.isLoading = false;
+      state.appDetails.error = null;
+      state.appDetails.data = action.payload?.data;
+    },
+    getAppDetailsFailure: (state, action) => {
+      state.appDetails.isLoading = false;
+      state.appDetails.error = action.payload;
     },
     toggleCreateAppFormOpen: (state) => {
-      state.createAppForm.isOpen = !state.createAppForm.isOpen;
+      state.createAppForm.isOpen = !state.createAppForm?.isOpen;
       if (!state.createAppForm.isOpen) {
         // Form Closed
         state.createAppForm.isMinimize = false;
@@ -63,7 +87,7 @@ const appsSlice = createSlice({
       }
     },
     toggleCreateAppFormMinimize: (state) => {
-      state.createAppForm.isMinimize = !state.createAppForm.isMinimize;
+      state.createAppForm.isMinimize = !state.createAppForm?.isMinimize;
     },
     setCreateAppFormData: (state, action) => {
       state.createAppForm.formData = action.payload;
@@ -119,6 +143,18 @@ const appsSlice = createSlice({
         message: action.payload,
       };
     },
+    getAppsBanner: (state, action) => {
+      state.banner.isLoading = true;
+    },
+    getAppsBannerSuccess: (state, action) => {
+      state.banner.isLoading = false;
+      state.banner.error = null;
+      state.banner.list = action.payload?.data;
+    },
+    getAppsBannerFailure: (state, action) => {
+      state.banner.isLoading = false;
+      state.banner.error = action.payload;
+    },
     setToast: (state, action) => {
       state.toastData = action.payload;
     },
@@ -126,6 +162,12 @@ const appsSlice = createSlice({
 });
 
 export const {
+  getAllApps,
+  getAllAppsSuccess,
+  getAllAppsFailure,
+  getAppDetails,
+  getAppDetailsSuccess,
+  getAppDetailsFailure,
   toggleCreateAppFormOpen,
   toggleCreateAppFormMinimize,
   setCreateAppFormData,
@@ -138,6 +180,9 @@ export const {
   uploadAppSuccess,
   uploadAppCancelled,
   uploadAppFailure,
+  getAppsBanner,
+  getAppsBannerSuccess,
+  getAppsBannerFailure,
   setToast,
 } = appsSlice.actions;
 

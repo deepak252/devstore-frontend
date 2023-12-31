@@ -1,0 +1,86 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container {
+  padding: 24px;
+
+  &__top {
+    @include flex-container;
+
+    &__info {
+      margin: 22px;
+      text-align: center;
+
+      &__title {
+        color: $GRAY_6;
+        color: $ON_SURFACE;
+        font-size: 50px;
+        font-weight: bold;
+        margin: 0.3em 0;
+      }
+
+      &__description {
+        color: $GRAY_5;
+        font-size: 24px;
+        margin: 0.2em 0;
+      }
+    }
+  }
+
+  &__topBtns {
+    @include flex-center;
+    margin: 36px 12px 80px;
+
+    &__start {
+      margin: 0 18px;
+      padding: 19.5px 37.5px;
+      font-size: 16px;
+    }
+
+    &__explore {
+      margin: 0 18px;
+      padding: 18px 36px;
+      font-size: 16px;
+
+      
+    }
+  }
+
+  hr{
+    width: 100%;
+    background-color: $GRAY_1;
+    height: 1px;
+    border: none;
+    margin-bottom: 70px;
+  }
+
+
+  @media #{$MEDIA_SCREEN_BELOW_MD} {
+    &__top {
+      display: block;
+
+      &__info {
+        margin: 22px;
+
+        &__title {
+          font-size: 38px;
+        }
+
+        &__description {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &__topBtns {
+      &__start {
+        padding: 16.5px 33.5px;
+      }
+
+      &__explore {
+        padding: 15px 32px;
+      }
+    }
+  }
+
+}

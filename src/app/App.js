@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DefaultLayout from '../components/DefaultLayout';
-import Apps from '../features/apps/AppsPage';
+import AppsPage from '../features/apps/AppsPage';
+import AppDetailsPage from '../features/apps/AppDetailsPage';
 import Games from '../pages/Games';
 import Websites from '../pages/Websites';
-import Home from '../pages/Home';
 import Auth from '../features/auth/AuthPage';
 import UserProfile from '../features/user/UserProfile';
 import PageNotFound from '../components/Error/PageNotFound';
@@ -13,6 +13,8 @@ import { setupInterceptor } from '../services/api';
 import { isSignedIn } from './cache';
 import { getUser } from '../features/user/userSlice';
 import { getMetadata } from '../features/metadata/metadataSlice';
+import HomePage from '../features/home/HomePage';
+import ScrollToTop from '../components/ScrollToTop';
 
 function App() {
   const navigate = useNavigate();
@@ -29,10 +31,13 @@ function App() {
   }, []);
   return (
     <>
+      <ScrollToTop />
       <Routes>
+        {/* <Route path='/' element={<HomePage />} /> */}
         <Route path='/' element={<DefaultLayout />}>
-          <Route index element={<Home />} />
-          <Route path='apps' element={<Apps />} />
+          <Route index element={<HomePage />} />
+          <Route path='apps' element={<AppsPage />} />
+          <Route path='apps/:appId' element={<AppDetailsPage />} />
           <Route path='games' element={<Games />} />
           <Route path='websites' element={<Websites />} />
           <Route path='user/:username' element={<UserProfile />} />

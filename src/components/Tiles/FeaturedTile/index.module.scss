@@ -1,0 +1,85 @@
+@import '../../../common';
+@import '../../../variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  overflow: hidden; // required
+  margin: 4px;
+  border-radius: 12px;
+  width: 350px;
+
+  &__featuredImage {
+    background: #343434c0;
+
+    img {
+      aspect-ratio: 1.7;
+      height: 100%;
+      width: 100%;
+
+      // object-fit: fill;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &__bottom {
+    @include flex-container;
+
+    &__icon {
+      height: 50px;
+      width: 50px;
+      aspect-ratio: 1;
+      background-color: $SURFACE;
+      border-radius: 50%;
+      margin: 8px 0 8px 8px;
+    }
+
+    &__info {
+      margin: 6px 8px;
+      overflow: hidden;
+
+
+      &__title {
+        @include font-fourteen-bold;
+        @include overflow-ellipsis;
+        margin: 0.2em 0;
+      }
+
+      &__category,
+      &__rating,
+      &__owner {
+        @include font-thirteen-light;
+        margin: 0.2em 0;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: $GRAY_OPACITY_1;
+  }
+
+  @media #{$MEDIA_SCREEN_SM_TO_MD} {
+    width: 315px;
+    &__bottom{
+      &__icon{
+        height: 45px;
+        width: 45px;
+      }
+    }
+  }
+
+  @media #{$MEDIA_SCREEN_BELOW_SM} {
+    width: 280px;
+
+    &__bottom{
+      &__icon{
+        height: 40px;
+        width: 40px;
+      }
+    }
+  }
+
+}

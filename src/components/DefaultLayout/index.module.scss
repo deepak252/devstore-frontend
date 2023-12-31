@@ -1,25 +1,26 @@
 @import '../../common';
 @import '../../variables';
 
-.container{
-  @include flex-center;
-  .content{
-    width: 100%;
-    max-width: 1200px;
-    margin-top: 70px;
-    margin-top: 70px;
+.layout {
+  margin-top: 70px;
 
-    &__loader{
-      @include absolute-center;
+  &__2 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+
+    .content {
+      width: 100%;
+      max-width: 1200px;
+
+      &__loader {
+        @include absolute-center;
+      }
     }
-
   }
-}
 
-@media #{$MEDIA_SCREEN_BELOW_SM}{
-  .container{
-    .content{
-      margin-top: 110px;
-    }
+  @media #{$MEDIA_SCREEN_BELOW_SM} {
+    margin-top: 117px;
   }
 }

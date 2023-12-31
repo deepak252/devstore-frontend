@@ -1,0 +1,6 @@
+@import '../../../variables';
+@import '../../../common';
+
+.loader{
+  @include absolute-center;
+}

@@ -1,0 +1,48 @@
+@import '../../../../variables';
+@import '../../../../common';
+
+.container {
+  position: relative;
+  height: 300px;
+  width: 300px;
+
+  img {
+    height: 120px;
+    width: 120px;
+    position: absolute;
+
+    &[alt='android'] {
+      bottom: 0;
+      left: 0;
+    }
+
+    &[alt='ios'] {
+      bottom: 0;
+      right: 0;
+    }
+
+    &[alt='web'] {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  @media #{$MEDIA_SCREEN_BELOW_MD} {
+    @include flex-center;
+    height: auto;
+    width: auto;
+    padding: 40px 0;
+
+    img {
+      height: 100px;
+      width: 100px;
+      margin: 0 24px;
+      position: static;
+
+      &[alt='web'] {
+        transform: none;
+      }
+    }
+  }
+}

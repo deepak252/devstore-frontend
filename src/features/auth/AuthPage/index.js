@@ -64,7 +64,7 @@ const FORM_CONFIG = Object.freeze({
 });
 
 const Auth = () => {
-  const location = useLocation();
+  const {pathname} = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formName, setFormType] = useState(FORM_CONFIG.SIGN_IN.name);
@@ -180,7 +180,7 @@ const Auth = () => {
           <h2 className={styles.layout__form__heading}>Welcome...</h2>
 
           <OutlinedButton
-            href={getGoogleUrl(location.pathname)}
+            href={getGoogleUrl(pathname)}
             openNewTab={true}
             leading={
               <GoogleIcon className={styles.layout__form__btn_google__icon} />
@@ -277,7 +277,7 @@ const Auth = () => {
           <ExtraMessage />
         </div>
       </div>
-      {isLoading && <LoaderModal isOpen={isLoading} />}
+      {isLoading && <LoaderModal isOpen={true} />}
       {toastData?.message && (
         <Toast
           message={toastData.message}

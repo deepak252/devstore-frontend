@@ -1,0 +1,37 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  padding: 12px 30px;
+  background-color: $INVERSE_SURFACE;
+  color: white;
+  
+  &__content{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 40px 0 60px;
+    &__logo{
+      span{
+        color: $ON_INVERSE_SURFACE;
+      }
+    }
+  
+    &__col{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0 12px;
+      a {
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__copyright{
+    text-align: center;
+    font-size: 14px;
+  }
+}

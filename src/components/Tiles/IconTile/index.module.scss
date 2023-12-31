@@ -1,0 +1,43 @@
+@import '../../../common';
+@import '../../../variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  overflow: hidden; // required
+  border-radius: 24px;
+
+  &__icon {
+    aspect-ratio: 1;
+    background-color: $SURFACE;
+    border-radius: 24px;
+    box-shadow: 0px 0px 3px 0 $GRAY_3;
+    margin: 8px;
+  }
+
+  &__info {
+    margin: 6px 8px 12px;
+
+    &__title {
+      @include font-fourteen-bold;
+      @include max-lines-ellipsis($lines: 2);
+      margin: 0.2em 0;
+    }
+
+    &__category,
+    &__rating {
+      @include font-thirteen-light;
+      margin: 0.2em 0;
+    }
+  }
+
+  &:hover {
+    background-color: $GRAY_OPACITY_1;
+  }
+
+  &__shimmer {
+    height: 160px;
+    width: 100%;
+  }
+}

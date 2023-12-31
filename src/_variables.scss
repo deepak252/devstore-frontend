@@ -6,7 +6,7 @@ $MEDIA_XL: 1600px;
 
 $MEDIA_SCREEN_BELOW_XS: 'only screen and (max-width: #{$MEDIA_XS})';
 $MEDIA_SCREEN_XS_TO_SM: 'only screen and (min-width: #{$MEDIA_XS}) and (max-width: #{$MEDIA_SM})';
-$MEDIA_SCREEN_XM_TO_MD: 'only screen and (min-width: #{$MEDIA_SM}) and (max-width: #{$MEDIA_MD})';
+$MEDIA_SCREEN_SM_TO_MD: 'only screen and (min-width: #{$MEDIA_SM}) and (max-width: #{$MEDIA_MD})';
 $MEDIA_SCREEN_MD_TO_LG: 'only screen and (min-width: #{$MEDIA_MD}) and (max-width: #{$MEDIA_LG})';
 $MEDIA_SCREEN_ABOVE_LG: 'only screen and (min-width: #{$MEDIA_LG})';
 
@@ -57,7 +57,9 @@ $GRAY_4: #767676;
 $GRAY_3: #a3a3a3;
 $GRAY_2: #c7c7c7;
 $GRAY_1: #e4e4e4;
-$GRAY_OPACITY: #80808046
+$GRAY_OPACITY_3: #80808046;
+$GRAY_OPACITY_2: #ABABAB46;
+$GRAY_OPACITY_1: #C9C9C946;
 //********** 3. Indigo
 // val md_theme_light_primary = Color(4F56A9)
 // val md_theme_light_onPrimary = Color(FFFFFF)

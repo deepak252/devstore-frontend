@@ -34,7 +34,7 @@ $TRANSLATE_R: calc($TRACK_WIDTH - $THUMB_SIZE/2 + $TRANSLATE_L);
     height: $THUMB_SIZE;
     border-radius: 50%;
     background-color: white;
-    box-shadow: 0 0 2px 2px $GRAY_OPACITY;
+    box-shadow: 0 0 2px 2px $GRAY_OPACITY_3;
     transform: translateX($TRANSLATE_L);
     transition: 0.5s;
 
@@ -44,7 +44,7 @@ $TRANSLATE_R: calc($TRACK_WIDTH - $THUMB_SIZE/2 + $TRANSLATE_L);
     }
 
     &:hover {
-      box-shadow: 0 0 0px 6px $GRAY_OPACITY;
+      box-shadow: 0 0 0px 6px $GRAY_OPACITY_3;
     }
   }
   
@@ -52,7 +52,7 @@ $TRANSLATE_R: calc($TRACK_WIDTH - $THUMB_SIZE/2 + $TRANSLATE_L);
     cursor: not-allowed;
     opacity: 0.5;
     .container__thumb {
-      box-shadow: 0 0 2px 2px $GRAY_OPACITY;
+      box-shadow: 0 0 2px 2px $GRAY_OPACITY_3;
     }
   }
 

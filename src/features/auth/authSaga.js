@@ -28,7 +28,7 @@ function* signInHandler(action) {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error(e.message);
+    console.error('signInHandler', e);
     yield put(signInFailure(e?.message || 'Something went wrong'));
   }
 }
@@ -47,7 +47,7 @@ function* signUpHandler(action) {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error(e);
+    console.error('signUpHandler', e);
     yield put(signUpFailure(e?.message || 'Something went wrong'));
   }
 }
@@ -67,7 +67,7 @@ function* checkUsernameAvailableHandler(action) {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error(e);
+    console.error('checkUsernameAvailableHandler', e);
     yield put(usernameAvailableFailure(e?.message || 'Something went wrong'));
   }
 }

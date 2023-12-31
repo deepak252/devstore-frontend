@@ -13,6 +13,7 @@ import Switch from '../../../components/Switch';
 import AttachmentAppTile from './AttachmentAppTile';
 import FormInputWrapper from '../../../components/FormInputWrapper';
 import ConfirmationDialog from '../../../components/ConfirmationDialog';
+import Attachment from '../../../components/Attachment';
 import AppInfo from './AppInfo';
 import { ReactComponent as MinimizeIcon } from '../../../assets/icons/Minimize.svg';
 import { ReactComponent as AddImageIcon } from '../../../assets/icons/AddImage.svg';
@@ -30,14 +31,14 @@ import {
 import useFormValidator from '../../../hooks/useFormValidator';
 import { generateOptions } from '../../../utils';
 import { appFormValidator } from '../util';
-import styles from './index.module.scss';
+import { getFileSizeKb } from '../../../utils/fileUtil';
 import {
   ATTACHMENT_TYPE,
   FILE_EXTENSIONS,
   TOAST_TYPE,
 } from '../../../constants';
-import Attachment from '../../../components/Attachment';
-import { getFileSizeKb } from '../../../utils/fileUtil';
+import styles from './index.module.scss';
+
 
 const MAX_IMAGES = 8;
 
@@ -301,7 +302,7 @@ const CreateAppForm = () => {
             wrapperClass={'mt-8'}
           />
 
-          <FormInputWrapper title='Add App Icon'>
+          <FormInputWrapper title='Add App Icon*' error={error.attachmentIcon}>
             <FileInput
               hintText={'Drag & drop or click to select file'}
               hintDescription={`(Only ${FILE_EXTENSIONS.IMAGE.join(
@@ -327,9 +328,10 @@ const CreateAppForm = () => {
             />
           )}
           <FormInputWrapper
-            title={`Add Images (${
+            title={`Add Screenshots/Images (${
               formData?.attachmentImages?.length ?? 0
-            }/${MAX_IMAGES})`}
+            }/${MAX_IMAGES})*`}
+            error={error.attachmentImages}
           >
             <FileInput
               hintText={'Drag & drop or click to select file'}

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import IconButton from '../Buttons/IconButton';
 import AppLogo from '../AppLogo';
 import NavbarOptions from './NavbarOptions';
@@ -19,6 +19,7 @@ import { clearUserCache } from '../../app/cache';
 import styles from './index.module.scss';
 
 const Navbar = ({ children }) => {
+  const { pathname } = useLocation();
   const isUserLoading = useSelector((state) => state?.user?.isLoading);
   const user = useSelector((state) => state?.user?.user);
   const { width } = useWindowDimensions();
@@ -83,10 +84,12 @@ const Navbar = ({ children }) => {
       <AppLogo className={styles.navbar__logo} />
       {!isSmallScreen && children}
       <div className={styles.navbar__actions}>
-        <IconButton
-          icon={<SearchIcon className='size-24' />}
-          className={styles.navbar__actions__iconButton}
-        />
+        {['/apps', '/websites', '/games'].includes(pathname) && (
+          <IconButton
+            icon={<SearchIcon className='size-24' />}
+            className={styles.navbar__actions__iconButton}
+          />
+        )}
         {!isUserLoading ? (
           <Dropdown
             options={options}
