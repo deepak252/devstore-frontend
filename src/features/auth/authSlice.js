@@ -56,6 +56,7 @@ const authSlice = createSlice({
       };
     },
     checkUsernameAvailable: (state) => {
+      state.usernameError=null;
       state.isLoadingUsername = true;
     },
     usernameAvailableSuccess: (state) => {

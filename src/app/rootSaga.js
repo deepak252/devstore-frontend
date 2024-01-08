@@ -4,7 +4,15 @@ import authSaga from '../features/auth/authSaga';
 import userSaga from '../features/user/userSaga';
 import appsSaga from '../features/apps/appsSaga';
 import homeSaga from '../features/home/homeSaga';
+import profileSaga from '../features/profile/profileSaga';
 
 export default function* rootSaga() {
-  yield all([authSaga(), userSaga(), metadataSaga(), appsSaga(), homeSaga()]);
+  yield all([
+    authSaga(),
+    userSaga(),
+    metadataSaga(),
+    appsSaga(),
+    homeSaga(),
+    profileSaga(),
+  ]);
 }

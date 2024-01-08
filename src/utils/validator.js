@@ -17,8 +17,8 @@ export const validateUsername = (val) => {
   if (isEmptyString(val)) {
     return 'Username can\'t be empty';
   }
-  if (val.length < 3) {
-    return 'Username must contain at least 3 characters';
+  if (val.length < 4) {
+    return 'Username must contain at least 4 characters';
   }
   if (val.length > 20) {
     return 'Username should not contain more than 20 characters';

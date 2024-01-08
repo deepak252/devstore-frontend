@@ -35,6 +35,7 @@ import { getFileSizeKb } from '../../../utils/fileUtil';
 import {
   ATTACHMENT_TYPE,
   FILE_EXTENSIONS,
+  PLATFORM,
   TOAST_TYPE,
 } from '../../../constants';
 import styles from './index.module.scss';
@@ -55,7 +56,7 @@ const CreateAppForm = () => {
   const { error, validateField, validateForm, clearFormError } =
     useFormValidator(appFormValidator);
   const platform = formData?.platform;
-  const isIOS = platform === 'ios';
+  const isIOS = platform === PLATFORM.iOS;
 
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
@@ -206,7 +207,10 @@ const CreateAppForm = () => {
                 active={isIOS}
                 disabled={formData.attachmentApp ? true : false}
                 onChange={(val) =>
-                  handleInputChange('platform', val ? 'ios' : 'android')
+                  handleInputChange(
+                    'platform',
+                    val ? PLATFORM.iOS : PLATFORM.Android
+                  )
                 }
               />
               <span>IOS</span>

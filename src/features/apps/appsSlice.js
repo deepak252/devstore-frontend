@@ -8,7 +8,7 @@ const formDataInitialState = {
   sourceCode: '',
   isSourceCodePublic: true,
   isPrivate: false,
-  platform: 'android',
+  platform: PLATFORM.Android,
   attachmentApp: null, // File Instance
   attachmentIcon: null,
   attachmentImages: [],
@@ -81,11 +81,11 @@ const appsSlice = createSlice({
       state.appData.error = action.payload;
     },
     getAppDetails: (state, action) => {
-      state.appDetails ={
-        isLoading:true,
+      state.appDetails = {
+        isLoading: true,
         error: null,
-        data: null
-      }
+        data: null,
+      };
     },
     getAppDetailsSuccess: (state, action) => {
       state.appDetails.isLoading = false;
