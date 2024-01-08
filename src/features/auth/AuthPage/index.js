@@ -64,7 +64,7 @@ const FORM_CONFIG = Object.freeze({
 });
 
 const Auth = () => {
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formName, setFormType] = useState(FORM_CONFIG.SIGN_IN.name);
@@ -92,8 +92,8 @@ const Auth = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      // Auth Success, navigate to home screen and fetch user profile
-      navigate('/', { replace: true });
+      // Auth Success, navigate back to previous route
+      navigate(-1, { replace: true });
       dispatch(getUser());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,0 +1,35 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container {
+  position: relative;
+
+  &__iconButton {
+    margin-left: 8px;
+    min-height: 36px;
+    min-width: 36px;
+  }
+
+  &__searchInput {
+    position: absolute;
+    right: 0;
+    top: -15px;
+    border-radius: 200px !important;
+    background-color: white;
+    padding: 7px 8px 7px 12px !important;
+    border: 1px solid $GRAY_2;
+
+    &__iconSearch {
+      fill: $GRAY_4;
+    }
+
+    &__iconClose {
+      fill: white;
+      background-color: $GRAY_4;
+      border-radius: 50%;
+      padding: 2px;
+      margin: 0 2px;
+    }
+
+  }
+}

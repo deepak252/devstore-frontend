@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import IconButton from '../Buttons/IconButton';
 import AppLogo from '../AppLogo';
 import NavbarOptions from './NavbarOptions';
 import Dropdown from '../Dropdown';
 import Shimmer from '../Shimmer';
-import { ReactComponent as SearchIcon } from '../../assets/icons/Search.svg';
+import SearchField from './SearchField';
 import { ReactComponent as AccountIcon } from '../../assets/icons/Account.svg';
 import { ReactComponent as SignInIcon } from '../../assets/icons/SignIn.svg';
 import { ReactComponent as SignOutIcon } from '../../assets/icons/SignOut.svg';
@@ -19,7 +19,6 @@ import { clearUserCache } from '../../app/cache';
 import styles from './index.module.scss';
 
 const Navbar = ({ children }) => {
-  const { pathname } = useLocation();
   const isUserLoading = useSelector((state) => state?.user?.isLoading);
   const user = useSelector((state) => state?.user?.user);
   const { width } = useWindowDimensions();
@@ -72,6 +71,7 @@ const Navbar = ({ children }) => {
         dispatch(signOut());
         dispatch(deleteUser());
         clearUserCache();
+        navigate(0); // reload current route
         break;
       }
       default: {
@@ -84,12 +84,7 @@ const Navbar = ({ children }) => {
       <AppLogo className={styles.navbar__logo} />
       {!isSmallScreen && children}
       <div className={styles.navbar__actions}>
-        {['/apps', '/websites', '/games'].includes(pathname) && (
-          <IconButton
-            icon={<SearchIcon className='size-24' />}
-            className={styles.navbar__actions__iconButton}
-          />
-        )}
+        <SearchField />
         {!isUserLoading ? (
           <Dropdown
             options={options}

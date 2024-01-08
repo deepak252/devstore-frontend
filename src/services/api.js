@@ -27,9 +27,11 @@ export const setupInterceptor = (navigate) => {
 const getQueryString = (obj) => {
   let queryString =
     obj &&
-    Object.keys(obj)
+    Object.entries(obj)
+      .filter(([key, value]) => value !== undefined && value !== null)
       .map(
-        (key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
       )
       .join('&');
   queryString = queryString && `?${queryString}`;
@@ -54,7 +56,14 @@ export const getRequest = async (
 
 export const postRequest = async (
   endpoint = '',
-  { queryParams, data, headers = {}, onUploadProgress, onDownloadProgress, ...args } = {}
+  {
+    queryParams,
+    data,
+    headers = {},
+    onUploadProgress,
+    onDownloadProgress,
+    ...args
+  } = {}
 ) => {
   const queryString = getQueryString(queryParams);
   const authToken = getAuthToken();
@@ -66,7 +75,7 @@ export const postRequest = async (
       },
       onUploadProgress,
       onDownloadProgress,
-      ...args
+      ...args,
     })
     .then((response) => response)
     .catch((error) => error.response);

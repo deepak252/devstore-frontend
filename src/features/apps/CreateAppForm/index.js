@@ -39,7 +39,6 @@ import {
 } from '../../../constants';
 import styles from './index.module.scss';
 
-
 const MAX_IMAGES = 8;
 
 const CreateAppForm = () => {
@@ -55,7 +54,8 @@ const CreateAppForm = () => {
   );
   const { error, validateField, validateForm, clearFormError } =
     useFormValidator(appFormValidator);
-  const isIos = formData?.isIos;
+  const platform = formData?.platform;
+  const isIOS = platform === 'ios';
 
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
@@ -81,7 +81,7 @@ const CreateAppForm = () => {
       handleInputChange(field, files[0]);
       const formData = new FormData();
       formData.append('attachmentApp', files[0]);
-      formData.append('isIos', isIos ?? false);
+      formData.append('platform', platform);
       dispatch(uploadApp(formData));
     } else if (field === 'attachmentImages') {
       let updatedFiles = [...formData?.[field]];
@@ -134,10 +134,11 @@ const CreateAppForm = () => {
       sourceCode,
       isSourceCodePublic,
       isPrivate,
-      isIos,
+      platform,
       attachmentIcon,
       attachmentImages,
       attachmentVideo,
+      attachmentGraphic,
     } = formData ?? {};
     const data = {
       name,
@@ -146,7 +147,7 @@ const CreateAppForm = () => {
       sourceCode,
       isSourceCodePublic,
       isPrivate,
-      isIos,
+      platform,
       uploadedAppId: uploadedAppInfo?._id,
     };
     fd.append('data', JSON.stringify(data));
@@ -155,6 +156,7 @@ const CreateAppForm = () => {
       fd.append('attachmentImages', imageFile);
     });
     attachmentVideo && fd.append('attachmentVideo', attachmentVideo);
+    attachmentGraphic && fd.append('attachmentGraphic', attachmentGraphic);
     dispatch(createApp(fd));
   };
 
@@ -201,25 +203,27 @@ const CreateAppForm = () => {
             />
             <div className={styles.modal__content__switch}>
               <Switch
-                active={isIos}
+                active={isIOS}
                 disabled={formData.attachmentApp ? true : false}
-                onChange={(val) => handleInputChange('isIos', val)}
+                onChange={(val) =>
+                  handleInputChange('platform', val ? 'ios' : 'android')
+                }
               />
               <span>IOS</span>
             </div>
           </div>
           <FormInputWrapper
-            title={`Upload ${isIos ? 'IPA' : 'APK'} File*`}
+            title={`Upload ${isIOS ? 'IPA' : 'APK'} File*`}
             error={error.attachmentApp}
           >
             <FileInput
               hintDescription={`(Only  ${
-                isIos ? '.ipa' : '.apk'
+                isIOS ? '.ipa' : '.apk'
               } file allowed | Maximum file size: 20MB)`}
               onSelectFiles={(files) =>
                 handleSelectFiles('attachmentApp', files)
               }
-              allowedFileTypes={isIos ? ['.ipa'] : ['.apk']}
+              allowedFileTypes={isIOS ? ['.ipa'] : ['.apk']}
               maxFileSizeKB={20480}
               isMultiple={false}
               disabled={formData.attachmentApp ? true : false}
@@ -356,6 +360,34 @@ const CreateAppForm = () => {
               onClose={() => handleRemoveFile('attachmentImages', attch)}
             />
           ))}
+          <FormInputWrapper title='Add Feature Graphic'>
+            <FileInput
+              hintText={'Drag & drop or click to select file'}
+              hintDescription={`(Only ${FILE_EXTENSIONS.IMAGE.join(
+                '/'
+              )} files allowed | Maximum file size: 2MB)`}
+              hintIcon={<AddImageIcon className='size-32' />}
+              onSelectFiles={(files) =>
+                handleSelectFiles('attachmentGraphic', files)
+              }
+              allowedFileTypes={FILE_EXTENSIONS.IMAGE}
+              maxFileSizeKB={2048}
+              disabled={formData.attachmentGraphic ? true : false}
+            />
+          </FormInputWrapper>
+          {formData?.attachmentGraphic && (
+            <Attachment
+              title={formData?.attachmentGraphic.name}
+              subtitle={`${getFileSizeKb(formData.attachmentGraphic.size)} KB`}
+              type={ATTACHMENT_TYPE.IMAGE}
+              onClose={() =>
+                handleRemoveFile(
+                  'attachmentGraphic',
+                  formData.attachmentGraphic
+                )
+              }
+            />
+          )}
           <FormInputWrapper title='Add Video'>
             <FileInput
               hintText={'Drag & drop or click to select file'}

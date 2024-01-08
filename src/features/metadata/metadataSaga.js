@@ -27,6 +27,6 @@ function* getMetadataHandler() {
   }
 }
 
-export default function* userSaga() {
+export default function* metadataSaga() {
   yield all([takeLatest(getMetadata.type, getMetadataHandler)]);
 }

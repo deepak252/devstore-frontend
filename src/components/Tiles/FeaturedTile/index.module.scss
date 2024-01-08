@@ -11,17 +11,12 @@
   width: 350px;
 
   &__featuredImage {
-    background: #343434c0;
-
+    background: rgba(74, 74, 74, 0.863);
     img {
       aspect-ratio: 1.7;
       height: 100%;
       width: 100%;
-
-      // object-fit: fill;
-      &:hover {
-        opacity: 0.6;
-      }
+      min-height: 150px;
     }
   }
 
@@ -29,8 +24,8 @@
     @include flex-container;
 
     &__icon {
-      height: 50px;
-      width: 50px;
+      height: 40px;
+      width: 40px;
       aspect-ratio: 1;
       background-color: $SURFACE;
       border-radius: 50%;
@@ -59,26 +54,49 @@
 
   &:hover {
     background-color: $GRAY_OPACITY_1;
+    &:hover {
+      img{
+        opacity: 0.8;
+      }
+    }
+  }
+
+  &__shimmer {
+    height: 250px;
+    width: 350px;
+    margin: 4px;
+    border-radius: 12px;
   }
 
   @media #{$MEDIA_SCREEN_SM_TO_MD} {
     width: 315px;
-    &__bottom{
-      &__icon{
-        height: 45px;
-        width: 45px;
+
+    &__bottom {
+      &__icon {
+        height: 35px;
+        width: 35px;
       }
+    }
+
+    &__shimmer {
+      height: 225px;
+      width: 315px;
     }
   }
 
   @media #{$MEDIA_SCREEN_BELOW_SM} {
     width: 280px;
 
-    &__bottom{
-      &__icon{
-        height: 40px;
-        width: 40px;
+    &__bottom {
+      &__icon {
+        height: 30px;
+        width: 30px;
       }
+    }
+
+    &__shimmer {
+      height: 200px;
+      width: 280px;
     }
   }
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TOAST_INITIAL_DATA, TOAST_TYPE } from '../../constants';
+import { PLATFORM, TOAST_INITIAL_DATA, TOAST_TYPE } from '../../constants';
 
 const formDataInitialState = {
   name: '',
@@ -8,21 +8,29 @@ const formDataInitialState = {
   sourceCode: '',
   isSourceCodePublic: true,
   isPrivate: false,
-  isIos: false,
+  platform: 'android',
   attachmentApp: null, // File Instance
   attachmentIcon: null,
   attachmentImages: [],
   attachmentVideo: null,
+  attachmentGraphic: null,
 };
 
 const initialState = {
-  allApps: {
-    list: [],
+  appData: {
+    items: [],
     pageNumber: 1,
     pageSize: 10,
     totalResults: 0,
     isLoading: false,
     error: null,
+  },
+  search: {
+    query: '',
+  },
+  filter: {
+    platform: PLATFORM.All, // all, android, ios
+    categories: [],
   },
   appDetails: {
     data: null,
@@ -54,20 +62,30 @@ const appsSlice = createSlice({
   name: 'apps',
   initialState,
   reducers: {
-    getAllApps: (state, action) => {
-      state.allApps.isLoading = true;
+    getApps: (state, action) => {
+      if (action.payload?.searchQuery) {
+        // clear prev items on search
+        state.appData.items = [];
+      }
+      if (!state.appData?.items?.length || action.payload?.enableLoading) {
+        state.appData.isLoading = true;
+      }
     },
-    getAllAppsSuccess: (state, action) => {
-      state.allApps.isLoading = false;
-      state.allApps.error = null;
-      state.allApps.list = action.payload?.data?.apps;
+    getAppsSuccess: (state, action) => {
+      state.appData.isLoading = false;
+      state.appData.error = null;
+      state.appData.items = action.payload?.data?.apps;
     },
-    getAllAppsFailure: (state, action) => {
-      state.allApps.isLoading = false;
-      state.allApps.error = action.payload;
+    getAppsFailure: (state, action) => {
+      state.appData.isLoading = false;
+      state.appData.error = action.payload;
     },
     getAppDetails: (state, action) => {
-      state.appDetails.isLoading = true;
+      state.appDetails ={
+        isLoading:true,
+        error: null,
+        data: null
+      }
     },
     getAppDetailsSuccess: (state, action) => {
       state.appDetails.isLoading = false;
@@ -155,6 +173,9 @@ const appsSlice = createSlice({
       state.banner.isLoading = false;
       state.banner.error = action.payload;
     },
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
     setToast: (state, action) => {
       state.toastData = action.payload;
     },
@@ -162,9 +183,9 @@ const appsSlice = createSlice({
 });
 
 export const {
-  getAllApps,
-  getAllAppsSuccess,
-  getAllAppsFailure,
+  getApps,
+  getAppsSuccess,
+  getAppsFailure,
   getAppDetails,
   getAppDetailsSuccess,
   getAppDetailsFailure,
@@ -183,6 +204,7 @@ export const {
   getAppsBanner,
   getAppsBannerSuccess,
   getAppsBannerFailure,
+  setFilter,
   setToast,
 } = appsSlice.actions;
 

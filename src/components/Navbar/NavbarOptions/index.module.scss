@@ -1,7 +1,7 @@
 @import '../../../variables';
 @import '../../../common';
 
-.navbar__options {
+.container {
   margin: 0 20px;
   a {
     @include font-sixteen;
@@ -15,7 +15,7 @@
   }
 }
 @media #{$MEDIA_SCREEN_BELOW_SM}{
-  .navbar__options{
+  .container{
     display: flex;
     justify-content: space-around;
     margin: 0;

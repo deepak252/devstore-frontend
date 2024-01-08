@@ -3,6 +3,13 @@
 
 .container {
 
+  &__chips{
+    margin: 0px 30px;
+    &__item{
+      margin-right: 12px;
+    }
+  }
+
   &__gridWrapper {
     margin: 15px 30px 50px;
   }

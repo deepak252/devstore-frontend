@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 const Chip = ({ selected, label, leading, trailing, onClick, className }) => {
   const chipClassnames = classNames(styles.container, className, {
     [styles.container__selected]: selected,
-    'c-poiner': onClick,
+    'c-pointer': onClick,
   });
   return (
     <div onClick={onClick} className={chipClassnames}>

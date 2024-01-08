@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '../../../components/Buttons/IconButton';
 import GridView from '../../../components/GridView';
@@ -15,33 +15,42 @@ import {
   toggleCreateAppFormOpen,
   toggleCreateAppFormMinimize,
   setToast,
-  getAllApps,
+  getApps,
   getAppsBanner,
+  setFilter,
 } from '../appsSlice';
-import { TOAST_INITIAL_DATA } from '../../../constants';
+import { PLATFORM, TOAST_INITIAL_DATA } from '../../../constants';
 import styles from './index.module.scss';
+import Chip from '../../../components/Chip';
 
 const AppsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const user = useSelector((state) => state?.user?.user);
   const toastData = useSelector((state) => state.apps?.toastData);
-  const allApps = useSelector((state) => state?.apps?.allApps);
+  const appData = useSelector((state) => state?.apps?.appData);
   const banner = useSelector((state) => state?.apps?.banner);
-  // let appsList = allApps?.list ?? [];
+  const filter = useSelector((state) => state?.apps?.filter);
+  // const categories = useSelector((state) => state?.metadata?.data?.appCategories);
   const isCreateAppFormOpen = useSelector(
     (state) => state.apps?.createAppForm?.isOpen
   );
   const isCreateAppFormMinimize = useSelector(
     (state) => state.apps?.createAppForm?.isMinimize
   );
-  console.log(allApps);
+  const query = searchParams.get('q')?.trim();
+  const isSearch = query?.length;
+
+  console.log(appData);
 
   useEffect(() => {
-    dispatch(getAllApps());
-    dispatch(getAppsBanner());
+    dispatch(getApps({ searchQuery: query?.trim() }));
+    if (!query?.length) {
+      dispatch(getAppsBanner());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   // let appsList1 = [
   //   {
@@ -99,38 +108,65 @@ const AppsPage = () => {
   };
   return (
     <div className={styles.container}>
-      <Carousel
-        items={
-          banner?.list.length
-            ? banner?.list.map((e) => (
-                <CarouselItem key={e._id} imgPath={e.image} />
-              ))
-            : banner?.isLoading
-            ? [...Array(3).keys()].map((id) => <CarouselItemShimmer key={id} />)
-            : []
-        }
-      />
-      {!allApps.error ? (
-        <GridView
-          heading={'Top Apps'}
+      {!isSearch && (
+        <Carousel
           items={
-            allApps?.list.length
-              ? allApps?.list.map((app) => (
-                  <IconTileMemo
-                    key={app._id}
-                    id={app._id}
-                    name={app.name}
-                    category={app.categories?.[0]}
-                    imgUrl={app.icon?.url}
-                  />
+            banner?.list.length
+              ? banner?.list.map((e) => (
+                  <CarouselItem key={e._id} imgPath={e.image} />
                 ))
-              : [...Array(6).keys()].map((id) => <IconTileShimmer key={id} />)
+              : banner?.isLoading
+              ? [...Array(3).keys()].map((id) => (
+                  <CarouselItemShimmer key={id} />
+                ))
+              : []
           }
+        />
+      )}
+
+      <div className={styles.container__chips}>
+        {Object.entries(PLATFORM).map(([key, value]) => (
+          <Chip
+            key={key}
+            label={key}
+            className={styles.container__chips__item}
+            selected={filter?.platform === value}
+            onClick={() => {
+              if(filter?.platform === value){
+                return
+              }
+              dispatch(setFilter({ platform: value }));
+              dispatch(getApps({ enableLoading: true }));
+            }}
+          />
+        ))}
+      </div>
+
+      {appData?.isLoading ? (
+        <GridView
+          items={[...Array(6).keys()].map((id) => (
+            <IconTileShimmer key={id} />
+          ))}
+          wrapperClass={styles.container__gridWrapper}
+          itemsClass={styles.container__gridItems}
+        />
+      ) : appData?.items?.length ? (
+        <GridView
+          heading={!isSearch ? 'Top Apps' : 'Results'}
+          items={appData?.items?.map((app) => (
+            <IconTileMemo
+              key={app._id}
+              id={app._id}
+              name={app.name}
+              category={app.categories?.[0]}
+              imgUrl={app.icon?.url}
+            />
+          ))}
           wrapperClass={styles.container__gridWrapper}
           itemsClass={styles.container__gridItems}
         />
       ) : (
-        <p>No Apps Found</p>
+        <p className={styles.container__gridWrapper}>No Apps Found</p>
       )}
       <IconButton
         icon={

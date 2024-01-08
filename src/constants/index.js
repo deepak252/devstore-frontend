@@ -32,3 +32,11 @@ export const FILE_EXTENSIONS = Object.freeze({
   IMAGE: ['.jpg', '.jpeg', '.png'],
   VIDEO: ['.mp4', '.avi', '.mkv', '.webm', '.3gp'],
 });
+
+
+export const PLATFORM = Object.freeze({
+  All: 'all',
+  Android: 'android',
+  iOS: 'ios',
+});
+

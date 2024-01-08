@@ -7,15 +7,16 @@ import {
   cancel,
   fork,
   call,
+  select,
 } from 'redux-saga/effects';
 import {
   createApp,
   createAppCancelled,
   createAppFailure,
   createAppSuccess,
-  getAllApps,
-  getAllAppsFailure,
-  getAllAppsSuccess,
+  getApps,
+  getAppsFailure,
+  getAppsSuccess,
   getAppDetails,
   getAppDetailsFailure,
   getAppDetailsSuccess,
@@ -30,25 +31,28 @@ import {
 } from './appsSlice';
 import { uploadTask } from '../../services/uploadTask';
 import { APPS_API, APP_UPLOAD_API, BANNER_API } from '../../constants/apiPath';
+import { getRequest, postRequest } from '../../services/api';
 import store from '../../app/store';
-import { getRequest } from '../../services/api';
 
-function* getAllAppsHandler(action) {
+function* getAppsHandler(action) {
   try {
-    const { pageNumber = 1 } = action.payload ?? {};
-    const response = yield call(getRequest, APPS_API, {
+    const { pageNumber = 1, searchQuery } = action.payload ?? {};
+    let filter = yield select((state) => state.apps?.filter);
+    const response = yield call(postRequest, APPS_API, {
       queryParams: {
         pageNumber,
+        searchQuery,
       },
+      data: filter,
     });
     if (response && response.status >= 200 && response.status <= 299) {
-      yield put(getAllAppsSuccess(response.data));
+      yield put(getAppsSuccess(response.data));
     } else {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error('getAllAppsHandler', e);
-    yield put(getAllAppsFailure(e?.message || 'Something went wrong'));
+    console.error('getAppsHandler', e);
+    yield put(getAppsFailure(e?.message || 'Something went wrong'));
   }
 }
 
@@ -76,7 +80,7 @@ function* createAppHandler(action) {
     // Fork a new task to handle the API call
     const task = yield fork(
       uploadTask,
-      APPS_API,
+      `${APPS_API}/create`,
       {
         data: formData,
         signal: controller.signal,
@@ -175,7 +179,7 @@ function* getAppsBannerHandler(action) {
 
 export default function* appsSaga() {
   yield all([
-    takeLatest(getAllApps.type, getAllAppsHandler),
+    takeLatest(getApps.type, getAppsHandler),
     takeLatest(getAppDetails.type, getAppDetailsHandler),
     takeLatest(createApp.type, createAppHandler),
     takeLatest(uploadApp.type, uploadAppHandler),

@@ -1,15 +1,21 @@
-import { useNavigate } from 'react-router-dom';
-import FeatureGraphic from './FeatureGraphic';
-import FlatButton from '../../../components/Buttons/FlatButton';
-import OutlinedButton from '../../../components/Buttons/OutlinedButton';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FeaturedTile from '../../../components/Tiles/FeaturedTile';
+import FeaturedTileShimmer from '../../../components/Tiles/FeaturedTile/FeaturedTileShimmer';
 import GridView from '../../../components/GridView';
+import { getFeatured } from '../homeSlice';
 import { isSignedIn } from '../../../app/cache';
 import styles from './index.module.scss';
+import Introduction from './Introduction';
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const signedIn = isSignedIn();
+  const dispatch = useDispatch();
+  const featured = useSelector((state) => state?.home?.featured);
+  useEffect(() => {
+    dispatch(getFeatured());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let appsList = [
     {
@@ -88,53 +94,55 @@ const HomePage = () => {
 
   return (
     <div className={styles.container}>
-      {!signedIn && (
-        <>
-          <div className={styles.container__top}>
-            <div className={styles.container__top__info}>
-              <p className={styles.container__top__info__title}>
-                Centralized Hub for App, Website, and Game Distribution
-              </p>
-              <p className={styles.container__top__info__description}>
-                Dev Store brings your creations to the world, all in one place.
-                Join and revolutionize the way you share and distribute your
-                digital innovations.
-              </p>
-            </div>
-            <div className={styles.container__top__graphic}>
-              <FeatureGraphic />
-            </div>
-          </div>
-          <div className={styles.container__topBtns}>
-            <FlatButton
-              onClick={() => navigate('/auth')}
-              text={'Get Started'}
-              className={styles.container__topBtns__start}
-            />
-            <OutlinedButton
-              text={'Explore'}
-              className={styles.container__topBtns__explore}
-            />
-          </div>
-          <hr />
-        </>
+      {!signedIn && <Introduction />}
+      {featured?.apps?.length || featured?.isLoading ? (
+        <GridView
+          heading='Featured Apps'
+          horizontalScroll={true}
+          items={
+            featured?.apps?.length
+              ? featured?.apps?.map((app) => (
+                  <FeaturedTile
+                    key={app._id}
+                    name={app.name}
+                    iconUrl={app.icon?.url}
+                    featuredImageUrl={app.featureGraphic?.url}
+                    owner={app.owner}
+                    redirectUrl={`apps/${app._id}`}
+                  />
+                ))
+              : [...Array(3).keys()].map((id) => (
+                  <FeaturedTileShimmer key={id} />
+                ))
+          }
+        />
+      ) : (
+        <div></div>
       )}
-     
-      <GridView 
-        heading='Featured Apps'
-        horizontalScroll={true}
-        items={appsList.map((app) => (
-          <FeaturedTile
-            key={app._id}
-            name={app.name}
-            iconUrl={app.icon?.url}
-            featuredImageUrl={app.images?.[0].url}
-            owner={app.owner}
-            redirectUrl={`apps/${app._id}`}
-          />
-        ))}
-      />
-      <GridView 
+
+      {/* {allApps?.list.length || allApps?.isLoading ? (
+        <GridView
+          heading={'Top Apps'}
+          items={
+            allApps?.list.length
+              ? allApps?.list.map((app) => (
+                  <IconTileMemo
+                    key={app._id}
+                    id={app._id}
+                    name={app.name}
+                    category={app.categories?.[0]}
+                    imgUrl={app.icon?.url}
+                  />
+                ))
+              : [...Array(6).keys()].map((id) => <IconTileShimmer key={id} />)
+          }
+          wrapperClass={styles.container__gridWrapper}
+          itemsClass={styles.container__gridItems}
+        />
+      ) : (
+        <p className={styles.container__gridWrapper}>No Apps Found</p>
+      )} */}
+      <GridView
         heading='Featured Websites'
         horizontalScroll={true}
         items={appsList.map((app) => (
@@ -148,7 +156,7 @@ const HomePage = () => {
           />
         ))}
       />
-      <GridView 
+      <GridView
         heading='Featured Games'
         horizontalScroll={true}
         items={appsList.map((app) => (

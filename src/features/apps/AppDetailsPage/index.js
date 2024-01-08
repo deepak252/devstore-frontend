@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PageNotFound from '../../../components/Error/PageNotFound';
 import ProjectDetailsView from '../../../components/ProjectDetailsView';
 import Loader from '../../../components/Loader';
-import PageNotFound from '../../../components/Error/PageNotFound';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getAppDetails } from '../appsSlice';
 import styles from './index.module.scss';
 
