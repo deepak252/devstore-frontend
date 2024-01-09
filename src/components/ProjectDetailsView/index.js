@@ -45,7 +45,7 @@ const ProjectDetailsView = ({ details }) => {
           </div>
           <div className={styles.container__header__info__owner}>
             <PersonIcon className='size-20 mr-8' />{' '}
-            <Link to={`/user/${details.owner?.username}`}>
+            <Link to={`/${details.owner?.username}`}>
               {details.owner?.username}
             </Link>
           </div>

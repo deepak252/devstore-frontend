@@ -4,6 +4,7 @@
 .container {
   display: flex;
   padding: 20px;
+
   img[alt='avatar'] {
     box-sizing: border-box;
     background-color: $GRAY_2;
@@ -13,42 +14,47 @@
     width: 160px;
   }
 
-  &__info{
+  &__info {
     margin: 0 30px;
     width: 100%;
-    .name{
+
+    .name {
       @include max-lines-ellipsis(2);
       font-weight: bold;
       font-size: 36px;
       margin: 12px 0;
 
     }
-   
-    .username{
+
+    .username {
       @include font-sixteen-bold;
     }
-    .headline{
+
+    .headline {
       @include font-sixteen;
       color: $GRAY_6;
     }
-    .bio{
+
+    .bio {
       @include font-fourteen;
     }
   }
 
-  &__social{
+  &__social {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 180px;
 
-    .btnFollow{
+    .btnFollow {
       margin: 12px 0;
     }
 
-    &__handles{
+    &__handles {
+      margin-top: 12px;
       display: flex;
-      img{
+
+      img {
         height: 36px;
         width: 36px;
         margin: 8px;
@@ -67,22 +73,21 @@
       width: 130px;
     }
 
-    &__info{
-      .name{
+    &__info {
+      .name {
         font-size: 32px;
       }
     }
 
-    &__social{
+    &__social {
       height: auto;
 
-      &__handles{
-        img{
+      &__handles {
+        img {
           margin: 8px 20px;
         }
       }
     }
-    
+
   }
 }
-

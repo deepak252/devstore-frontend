@@ -13,6 +13,7 @@ import styles from './index.module.scss';
 const ProfilePage = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state?.user?.user);
   const profile = useSelector((state) => state.profile);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const ProfilePage = () => {
         </div>
       ) : profile.user ? (
         <div className={styles.container}>
-          <ProfileHeading user={profile.user} />
+          <ProfileHeading user={profile.user} currentUser={currentUser} />
           {profile.user?.apps?.length ? (
             <GridView
               heading='Apps'

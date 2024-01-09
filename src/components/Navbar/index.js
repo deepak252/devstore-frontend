@@ -60,7 +60,7 @@ const Navbar = ({ children }) => {
   const handleOptionSelect = (option) => {
     switch (option?.value) {
       case 'profile': {
-        navigate(`/user/${user?.username}`);
+        navigate(`/${user?.username}`);
         break;
       }
       case 'signIn': {

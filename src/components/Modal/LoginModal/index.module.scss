@@ -1,0 +1,16 @@
+@import '../../../variables';
+@import '../../../common';
+
+.modal {
+  &__header {
+    margin: 0.5em 40px 0.5em 12px;
+  }
+
+  &__content {
+    padding: 30px 12px 12px;
+
+    &__btnLogin {
+      width: 100%;
+    }
+  }
+}
