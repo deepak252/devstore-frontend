@@ -67,7 +67,7 @@ const FORM_CONFIG = Object.freeze({
 });
 
 const Auth = () => {
-  const { pathname } = useLocation();
+  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formName, setFormType] = useState(FORM_CONFIG.SIGN_IN.name);
@@ -87,6 +87,7 @@ const Auth = () => {
   } = useSelector((state) => state?.auth);
   const { error, validateField, validateForm, clearFormError } =
     useFormValidator(FORM_CONFIG[formName]?.validator);
+  const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     clearFormError();
@@ -96,8 +97,8 @@ const Auth = () => {
   useEffect(() => {
     if (isAuthenticated) {
       // Auth Success, navigate back to previous route
-      navigate(-1, { replace: true });
       dispatch(getUser());
+      navigate(from, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
@@ -185,7 +186,7 @@ const Auth = () => {
           </h2>
 
           <OutlinedButton
-            href={getGoogleUrl(pathname)}
+            href={getGoogleUrl(location.pathname)}
             openNewTab={true}
             leading={
               <GoogleIcon className={styles.layout__form__btn_google__icon} />

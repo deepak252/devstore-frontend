@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DefaultLayout from '../components/DefaultLayout';
 import AppsPage from '../features/apps/AppsPage';
@@ -15,20 +15,22 @@ import { getMetadata } from '../features/metadata/metadataSlice';
 import HomePage from '../features/home/HomePage';
 import ScrollToTop from '../components/ScrollToTop';
 import ProfilePage from '../features/profile/ProfilePage.js';
+import useNavigateWithState from '../hooks/useNavigateWithState.js';
 
 function App() {
-  const navigate = useNavigate();
+  const navigateWithState = useNavigateWithState();
   const dispatch = useDispatch();
   const signedIn = isSignedIn();
 
   useEffect(() => {
-    setupInterceptor(navigate);
+    setupInterceptor(navigateWithState);
     dispatch(getMetadata());
     if (signedIn) {
       dispatch(getUser());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
       <ScrollToTop />

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '../../../components/Buttons/IconButton';
 import GridView from '../../../components/GridView';
@@ -8,6 +8,7 @@ import Toast from '../../../components/Toast';
 import Carousel, { CarouselItem } from '../../../components/Carousel';
 import CarouselItemShimmer from '../../../components/Carousel/CarouselItem/CarouselItemShimmer';
 import IconTileShimmer from '../../../components/Tiles/IconTile/IconTileShimmer';
+import Chip from '../../../components/Chip';
 import { IconTileMemo } from '../../../components/Tiles/IconTile';
 import { ReactComponent as AddIcon } from '../../../assets/icons/Add.svg';
 import { ReactComponent as EditIcon } from '../../../assets/icons/Edit.svg';
@@ -19,13 +20,13 @@ import {
   getAppsBanner,
   setFilter,
 } from '../appsSlice';
+import useNavigateWithState from '../../../hooks/useNavigateWithState';
 import { PLATFORM, TOAST_INITIAL_DATA } from '../../../constants';
 import styles from './index.module.scss';
-import Chip from '../../../components/Chip';
 
 const AppsPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigateWithState = useNavigateWithState();
   const [searchParams] = useSearchParams();
   const user = useSelector((state) => state?.user?.user);
   const toastData = useSelector((state) => state.apps?.toastData);
@@ -54,7 +55,7 @@ const AppsPage = () => {
 
   const handleCreateAppClick = () => {
     if (!user) {
-      return navigate('/auth');
+      return navigateWithState('/auth');
     }
     if (isCreateAppFormMinimize) {
       dispatch(toggleCreateAppFormMinimize());

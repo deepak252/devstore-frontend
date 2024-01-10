@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 import FlatButton from '../../../../components/Buttons/FlatButton';
 import OutlinedButton from '../../../../components/Buttons/OutlinedButton';
 import AndroidImage from '../../../../assets/images/android.png';
 import IosImage from '../../../../assets/images/apple.png';
 import WebImage from '../../../../assets/images/web.png';
+import useNavigateWithState from '../../../../hooks/useNavigateWithState';
 import styles from './index.module.scss';
-import { useRef } from 'react';
 
 const Introduction = () => {
   const endRef = useRef(null);
-  const navigate = useNavigate();
+  const navigateWithState = useNavigateWithState();
   return (
     <div>
       <div className={styles.container}>
@@ -33,7 +33,7 @@ const Introduction = () => {
       </div>
       <div className={styles.container__btns}>
         <FlatButton
-          onClick={() => navigate('/auth')}
+          onClick={() => navigateWithState('/auth')}
           text={'Get Started'}
           className={styles.container__btns__start}
         />

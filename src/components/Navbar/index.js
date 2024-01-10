@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import IconButton from '../Buttons/IconButton';
 import AppLogo from '../AppLogo';
 import NavbarOptions from './NavbarOptions';
@@ -13,6 +12,7 @@ import { ReactComponent as ProfileIcon } from '../../assets/icons/Profile.svg';
 import { ReactComponent as SettingsIcon } from '../../assets/icons/Settings.svg';
 import { ReactComponent as BookmarksIcon } from '../../assets/icons/Bookmarks.svg';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import useNavigateWithState from '../../hooks/useNavigateWithState';
 import { deleteUser } from '../../features/user/userSlice';
 import { signOut } from '../../features/auth/authSlice';
 import { clearUserCache } from '../../app/cache';
@@ -24,7 +24,7 @@ const Navbar = ({ children }) => {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 768; // 992px
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigateWithState = useNavigateWithState();
 
   const options = user
     ? [
@@ -60,18 +60,18 @@ const Navbar = ({ children }) => {
   const handleOptionSelect = (option) => {
     switch (option?.value) {
       case 'profile': {
-        navigate(`/${user?.username}`);
+        navigateWithState(`/${user?.username}`);
         break;
       }
       case 'signIn': {
-        navigate('/auth');
+        navigateWithState('/auth');
         break;
       }
       case 'signOut': {
         dispatch(signOut());
         dispatch(deleteUser());
         clearUserCache();
-        navigate(0); // reload current route
+        navigateWithState(0); // reload current route
         break;
       }
       default: {

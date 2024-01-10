@@ -1,9 +1,11 @@
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import FlatButton from '../../Buttons/FlatButton';
 import Modal from '../';
 import styles from './index.module.scss';
 
 const LoginModal = ({ onClose }) => {
+  const location = useLocation();
   return (
     <Modal
       isOpen={true}
@@ -18,6 +20,7 @@ const LoginModal = ({ onClose }) => {
           href='/auth'
           className={styles.modal__content__btnLogin}
           text='Login'
+          state={{ from: location }}
         />
       </div>
     </Modal>
