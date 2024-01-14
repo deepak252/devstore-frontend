@@ -11,6 +11,7 @@ const profileSlice = createSlice({
   initialState,
   reducers: {
     getProfile: (state) => {
+      state.user=null;
       state.isLoading = true;
     },
     getProfileSuccess: (state, action) => {
