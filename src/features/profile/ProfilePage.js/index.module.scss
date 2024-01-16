@@ -1,0 +1,17 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container {
+  &__gridWrapper {
+    margin: 15px 30px 50px;
+  }
+  
+}
+
+.loader {
+  @include absolute-center;
+}
+
+@media #{$MEDIA_SCREEN_BELOW_MD} {
+
+}

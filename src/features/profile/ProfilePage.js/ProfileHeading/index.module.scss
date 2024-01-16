@@ -1,0 +1,93 @@
+@import '../../../../variables';
+@import '../../../../common';
+
+.container {
+  display: flex;
+  padding: 20px;
+
+  img[alt='avatar'] {
+    box-sizing: border-box;
+    background-color: $GRAY_2;
+    opacity: 0.5;
+    border-radius: 50%;
+    height: 160px;
+    width: 160px;
+  }
+
+  &__info {
+    margin: 0 30px;
+    width: 100%;
+
+    .name {
+      @include max-lines-ellipsis(2);
+      font-weight: bold;
+      font-size: 36px;
+      margin: 12px 0;
+
+    }
+
+    .username {
+      @include font-sixteen-bold;
+    }
+
+    .headline {
+      @include font-sixteen;
+      color: $GRAY_6;
+    }
+
+    .bio {
+      @include font-fourteen;
+    }
+  }
+
+  &__social {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+
+    .btnFollow {
+      margin: 12px 0;
+    }
+
+    &__handles {
+      margin-top: 12px;
+      display: flex;
+
+      img {
+        height: 36px;
+        width: 36px;
+        margin: 8px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media #{$MEDIA_SCREEN_BELOW_MD} {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    img[alt='avatar'] {
+      height: 130px;
+      width: 130px;
+    }
+
+    &__info {
+      .name {
+        font-size: 32px;
+      }
+    }
+
+    &__social {
+      height: auto;
+
+      &__handles {
+        img {
+          margin: 8px 20px;
+        }
+      }
+    }
+
+  }
+}

@@ -5,13 +5,19 @@ import styles from './index.module.scss'
 const GridView = ({
   heading,
   items,
+  horizontalScroll,
   wrapperClass,
-  itemsClass
+  itemsClass,
 }) => {
+  const wrapperClassnames = classNames(styles.container, wrapperClass);
+  const itemsClassnames = classNames(itemsClass,{
+    [styles.container__items__vertical]: !horizontalScroll,
+    [styles.container__items__horizontal]: horizontalScroll
+  });
   return (
-    <div className={classNames(styles.container, wrapperClass)}>
+    <div className={wrapperClassnames}>
       <h3>{heading}</h3>
-      <div className={classNames(styles.container__items, itemsClass)}>
+      <div className={itemsClassnames}>
         {items}
       </div>
     </div>
@@ -21,8 +27,13 @@ const GridView = ({
 GridView.propTypes={
   heading: PropTypes.string,
   items: PropTypes.array,
+  horizontalScroll: PropTypes.bool,
   wrapperClass: PropTypes.string,
   itemsClass: PropTypes.string
+}
+
+GridView.defaultProps = {
+  horizontalScroll: false
 }
 
 export default GridView

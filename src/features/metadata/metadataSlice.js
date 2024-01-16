@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 };
 
-const userSlice = createSlice({
+const metadataSlice = createSlice({
   name: 'metadata',
   initialState,
   reducers: {
@@ -26,6 +26,6 @@ const userSlice = createSlice({
 });
 
 export const { getMetadata, getMetadataSuccess, getMetadataFailure } =
-  userSlice.actions;
+  metadataSlice.actions;
 
-export default userSlice.reducer;
+export default metadataSlice.reducer;

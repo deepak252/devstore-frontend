@@ -39,6 +39,7 @@ const debounce = debounceHandler();
 const FORM_CONFIG = Object.freeze({
   SIGN_IN: {
     name: 'SIGN_IN',
+    heading: 'Welcome...',
     buttonText: 'Sign In',
     validator: {
       usernameOrEmail: validateUsernameOrEmail,
@@ -47,6 +48,7 @@ const FORM_CONFIG = Object.freeze({
   },
   SIGN_UP: {
     name: 'SIGN_UP',
+    heading: 'Create Account',
     buttonText: 'Sign Up',
     validator: {
       email: validateEmail,
@@ -56,6 +58,7 @@ const FORM_CONFIG = Object.freeze({
   },
   RESET_PASSWORD: {
     name: 'RESET_PASSWORD',
+    heading: 'Reset Password',
     buttonText: 'Continue',
     validator: {
       email: validateEmail,
@@ -84,6 +87,7 @@ const Auth = () => {
   } = useSelector((state) => state?.auth);
   const { error, validateField, validateForm, clearFormError } =
     useFormValidator(FORM_CONFIG[formName]?.validator);
+  const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     clearFormError();
@@ -92,9 +96,9 @@ const Auth = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      // Auth Success, navigate to home screen and fetch user profile
-      navigate('/', { replace: true });
+      // Auth Success, navigate back to previous route
       dispatch(getUser());
+      navigate(from, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
@@ -177,7 +181,9 @@ const Auth = () => {
         </div>
 
         <div className={styles.layout__form}>
-          <h2 className={styles.layout__form__heading}>Welcome...</h2>
+          <h2 className={styles.layout__form__heading}>
+            {FORM_CONFIG[formName]?.heading}
+          </h2>
 
           <OutlinedButton
             href={getGoogleUrl(location.pathname)}
@@ -277,7 +283,7 @@ const Auth = () => {
           <ExtraMessage />
         </div>
       </div>
-      {isLoading && <LoaderModal isOpen={isLoading} />}
+      {isLoading && <LoaderModal isOpen={true} />}
       {toastData?.message && (
         <Toast
           message={toastData.message}

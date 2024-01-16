@@ -1,10 +1,11 @@
 @import '../../../variables';
 @import '../../../common';
 
-.navbar__options {
+.container {
   margin: 0 20px;
   a {
-    color: $ON_SURFACE_CONTAINER;
+    @include font-sixteen;
+    margin: 0;
     padding: 8px 12px;
     text-decoration: none;
 
@@ -14,7 +15,7 @@
   }
 }
 @media #{$MEDIA_SCREEN_BELOW_SM}{
-  .navbar__options{
+  .container{
     display: flex;
     justify-content: space-around;
     margin: 0;

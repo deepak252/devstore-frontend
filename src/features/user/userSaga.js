@@ -26,7 +26,7 @@ function* getUserHandler() {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error(e);
+    console.error('getUserHandler', e);
     yield put(getUserFailure(e?.message || 'Something went wrong'));
   }
 }
@@ -41,7 +41,7 @@ function* getUserProfileHandler(action) {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error(e);
+    console.error('getUserProfileHandler', e);
     yield put(getUserProfileFailure(e?.message || 'Something went wrong'));
   }
 }

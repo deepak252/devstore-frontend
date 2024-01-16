@@ -6,12 +6,23 @@ import {
   take,
   cancel,
   fork,
+  call,
+  select,
 } from 'redux-saga/effects';
 import {
   createApp,
   createAppCancelled,
   createAppFailure,
   createAppSuccess,
+  getApps,
+  getAppsFailure,
+  getAppsSuccess,
+  getAppDetails,
+  getAppDetailsFailure,
+  getAppDetailsSuccess,
+  getAppsBanner,
+  getAppsBannerFailure,
+  getAppsBannerSuccess,
   uploadApp,
   uploadAppCancelled,
   uploadAppFailure,
@@ -19,8 +30,46 @@ import {
   uploadAppSuccess,
 } from './appsSlice';
 import { uploadTask } from '../../services/uploadTask';
-import { APPS_API, APP_UPLOAD_API } from '../../constants/apiPath';
+import { APPS_API, APP_UPLOAD_API, BANNER_API } from '../../constants/apiPath';
+import { getRequest, postRequest } from '../../services/api';
 import store from '../../app/store';
+
+function* getAppsHandler(action) {
+  try {
+    const { pageNumber = 1, searchQuery } = action.payload ?? {};
+    let filter = yield select((state) => state.apps?.filter);
+    const response = yield call(postRequest, APPS_API, {
+      queryParams: {
+        pageNumber,
+        searchQuery,
+      },
+      data: filter,
+    });
+    if (response && response.status >= 200 && response.status <= 299) {
+      yield put(getAppsSuccess(response.data));
+    } else {
+      throw response?.data || response;
+    }
+  } catch (e) {
+    console.error('getAppsHandler', e);
+    yield put(getAppsFailure(e?.message || 'Something went wrong'));
+  }
+}
+
+function* getAppDetailsHandler(action) {
+  try {
+    const { appId = '' } = action.payload ?? {};
+    const response = yield call(getRequest, `${APPS_API}/${appId}`);
+    if (response && response.status >= 200 && response.status <= 299) {
+      yield put(getAppDetailsSuccess(response.data));
+    } else {
+      throw response?.data || response;
+    }
+  } catch (e) {
+    console.error('getAppDetailsHandler', e);
+    yield put(getAppDetailsFailure(e?.message || 'Something went wrong'));
+  }
+}
 
 function* createAppHandler(action) {
   try {
@@ -31,7 +80,7 @@ function* createAppHandler(action) {
     // Fork a new task to handle the API call
     const task = yield fork(
       uploadTask,
-      APPS_API,
+      `${APPS_API}/create`,
       {
         data: formData,
         signal: controller.signal,
@@ -110,10 +159,31 @@ function* uploadAppHandler(action) {
   }
 }
 
+function* getAppsBannerHandler(action) {
+  try {
+    const response = yield call(getRequest, BANNER_API, {
+      queryParams: {
+        category: 'apps',
+      },
+    });
+    if (response && response.status >= 200 && response.status <= 299) {
+      yield put(getAppsBannerSuccess(response.data));
+    } else {
+      throw response?.data || response;
+    }
+  } catch (e) {
+    console.error('getAppsBannerHandler', e);
+    yield put(getAppsBannerFailure(e?.message || 'Something went wrong'));
+  }
+}
+
 export default function* appsSaga() {
   yield all([
+    takeLatest(getApps.type, getAppsHandler),
+    takeLatest(getAppDetails.type, getAppDetailsHandler),
     takeLatest(createApp.type, createAppHandler),
     takeLatest(uploadApp.type, uploadAppHandler),
+    takeLatest(getAppsBanner.type, getAppsBannerHandler),
   ]);
 }
 

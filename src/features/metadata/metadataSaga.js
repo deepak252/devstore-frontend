@@ -22,11 +22,11 @@ function* getMetadataHandler() {
       throw response?.data || response;
     }
   } catch (e) {
-    console.error(e);
+    console.error('getMetadataHandler', e);
     yield put(getMetadataFailure(e?.message || 'Something went wrong'));
   }
 }
 
-export default function* userSaga() {
+export default function* metadataSaga() {
   yield all([takeLatest(getMetadata.type, getMetadataHandler)]);
 }

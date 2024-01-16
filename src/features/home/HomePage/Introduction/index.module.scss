@@ -1,0 +1,123 @@
+@import '../../../../variables';
+@import '../../../../common';
+
+.container {
+  @include flex-container;
+
+  &__info {
+    margin: 22px;
+    text-align: center;
+
+    &__title {
+      color: $GRAY_6;
+      color: $ON_SURFACE;
+      font-size: 50px;
+      font-weight: bold;
+      margin: 0.3em 0;
+    }
+
+    &__description {
+      color: $GRAY_5;
+      font-size: 24px;
+      margin: 0.2em 0;
+    }
+  }
+
+  &__graphic__icons {
+    position: relative;
+    height: 300px;
+    width: 300px;
+
+    img {
+      height: 120px;
+      width: 120px;
+      position: absolute;
+
+      &[alt='android'] {
+        bottom: 0;
+        left: 0;
+      }
+
+      &[alt='ios'] {
+        bottom: 0;
+        right: 0;
+      }
+
+      &[alt='web'] {
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+    }
+  }
+
+  &__btns {
+    @include flex-center;
+    margin: 36px 12px 80px;
+
+    &__start {
+      margin: 0 18px;
+      padding: 19.5px 37.5px;
+      font-size: 16px;
+    }
+
+    &__explore {
+      margin: 0 18px;
+      padding: 18px 36px;
+      font-size: 16px;
+    }
+  }
+
+  hr {
+    width: 100%;
+    background-color: $GRAY_1;
+    height: 1px;
+    border: none;
+    margin-bottom: 70px;
+  }
+
+  @media #{$MEDIA_SCREEN_BELOW_MD} {
+    display: block;
+
+    &__info {
+      margin: 22px;
+
+      &__title {
+        font-size: 38px;
+      }
+
+      &__description {
+        font-size: 18px;
+      }
+    }
+
+    &__graphic__icons {
+      @include flex-center;
+      height: auto;
+      width: auto;
+      padding: 40px 0;
+
+      img {
+        height: 100px;
+        width: 100px;
+        margin: 0 24px;
+        position: static;
+
+        &[alt='web'] {
+          transform: none;
+        }
+      }
+    }
+
+    &__btns {
+      &__start {
+        padding: 16.5px 33.5px;
+      }
+
+      &__explore {
+        padding: 15px 32px;
+      }
+    }
+  }
+
+}

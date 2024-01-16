@@ -1,25 +1,29 @@
+import { forwardRef } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-import styles from './index.module.scss';
 import FormInputWrapper from '../FormInputWrapper';
+import styles from './index.module.scss';
 
-const TextInput = ({
-  type,
-  name,
-  title,
-  placeholder,
-  value,
-  onChange,
-  leading,
-  trailing,
-  error,
-  multiline,
-  autoFocus,
-  disabled,
-  inputStyle,
-  wrapperClass,
-  textfieldClass,
-}) => {
+const TextInput = (
+  {
+    type,
+    name,
+    title,
+    placeholder,
+    value,
+    onChange,
+    onKeypress,
+    leading,
+    trailing,
+    error,
+    multiline,
+    autoFocus,
+    disabled,
+    inputStyle,
+    wrapperClass,
+    textfieldClass,
+  },
+  ref
+) => {
   return (
     <FormInputWrapper title={title} error={error} className={wrapperClass}>
       <div className={classNames(styles.container, textfieldClass)}>
@@ -31,9 +35,11 @@ const TextInput = ({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            onKeyDown={onKeypress}
             autoFocus={autoFocus}
             style={inputStyle}
             disabled={disabled}
+            ref={ref}
           />
         ) : (
           <input
@@ -42,9 +48,11 @@ const TextInput = ({
             placeholder={placeholder}
             value={value}
             onChange={onChange}
+            onKeyDown={onKeypress}
             autoFocus={autoFocus}
             style={inputStyle}
             disabled={disabled}
+            ref={ref}
           />
         )}
         {trailing}
@@ -53,26 +61,4 @@ const TextInput = ({
   );
 };
 
-TextInput.propTypes = {
-  type: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  leading: PropTypes.bool,
-  trailing: PropTypes.any,
-  error: PropTypes.string,
-  multiline: PropTypes.bool,
-  autoFocus: PropTypes.bool,
-  disabled: PropTypes.bool,
-  inputStyle: PropTypes.object,
-  wrapperClass: PropTypes.string,
-  textfieldClass: PropTypes.string,
-};
-
-TextInput.defaultProps = {
-  type: 'text',
-  autoFocus: false,
-};
-
-export default TextInput;
+export default forwardRef(TextInput);

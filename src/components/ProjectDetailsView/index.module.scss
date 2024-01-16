@@ -1,0 +1,181 @@
+@import '../../variables';
+@import '../../common';
+
+.container {
+  padding: 12px;
+  margin-bottom: 50px;
+
+  &__header {
+    @include flex-container;
+    margin: 4px;
+    text-decoration: none;
+
+    &__icon {
+      height: 200px;
+      width: 200px;
+      aspect-ratio: 1;
+      background-color: $SURFACE;
+      border-radius: 30px;
+      box-shadow: 0px 0px 3px 1px $GRAY_2;
+      margin: 8px;
+    }
+
+    &__info {
+      width: 100%;
+      color: $ON_SURFACE;
+      margin: 12px 20px;
+
+      &__title {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        p {
+          font-size: 32px;
+          font-weight: bold;
+          color: $ON_SURFACE;
+          margin: 0 12px 0 0;
+        }
+      }
+
+      &__owner {
+        @include flex-container;
+        @include font-sixteen-bold;
+
+        a {
+          text-decoration: none;
+          color: $PRIMARY;
+        }
+      }
+
+      &__category {
+        @include flex-container;
+        @include font-sixteen-light;
+      }
+
+      &__btns {
+        @include flex-container;
+        flex-wrap: wrap;
+
+        &__download {
+          margin: 12px 24px 12px 0;
+
+          .downloadIcon {
+            fill: white;
+            margin-right: 6px;
+            height: 20px;
+          }
+        }
+
+        &__sourcecode {
+          .codeIcon {
+            fill: $PRIMARY;
+            margin-right: 6px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  &__carousel {
+    &__image {
+      width: 300px;
+      max-width: 70vw;
+      min-width: 250px;
+      aspect-ratio: 0.75;
+
+      img {
+        object-fit: cover;
+
+      }
+    }
+  }
+
+  &__about {
+    p {
+      @include font-fourteen;
+    }
+
+    &__metaInfo {
+      margin-top: 20px;
+
+      p {
+        @include font-thirteen;
+
+        span {
+          @include font-thirteen-bold;
+          margin-left: 8px;
+        }
+      }
+
+      border: 1px solid $GRAY_2;
+      border-radius: 12px;
+      padding: 8px 20px;
+    }
+  }
+
+  @media #{$MEDIA_SCREEN_SM_TO_MD} {
+    &__header {
+      &__icon {
+        height: 150px;
+        width: 150px;
+      }
+
+      &__info {
+        &__title {
+          p {
+            font-size: 28px;
+          }
+        }
+
+        &__owner {
+          font-size: 15px;
+        }
+
+        &__category {
+          font-size: 15px;
+        }
+
+      }
+    }
+
+    &__carousel {
+      &__image {
+        width: 270px;
+      }
+    }
+  }
+
+  @media #{$MEDIA_SCREEN_BELOW_SM} {
+    &__header {
+      &__icon {
+        height: 120px;
+        width: 120px;
+      }
+
+      &__info {
+        &__title {
+          p {
+            font-size: 24px;
+          }
+        }
+
+        &__owner {
+          font-size: 14px;
+        }
+
+        &__category {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &__carousel {
+      &__image {
+        width: 240px;
+      }
+    }
+  }
+
+}

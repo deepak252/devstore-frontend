@@ -1,73 +1,61 @@
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '../../../components/Buttons/IconButton';
 import GridView from '../../../components/GridView';
-// import AppHorizontalTile from '../../components/Tiles/AppHorizontalTile'
-import { AppTileMemo } from '../../../components/Tiles/AppTile';
+import CreateAppForm from '../CreateAppForm';
+import Toast from '../../../components/Toast';
+import Carousel, { CarouselItem } from '../../../components/Carousel';
+import CarouselItemShimmer from '../../../components/Carousel/CarouselItem/CarouselItemShimmer';
+import IconTileShimmer from '../../../components/Tiles/IconTile/IconTileShimmer';
+import Chip from '../../../components/Chip';
+import { IconTileMemo } from '../../../components/Tiles/IconTile';
 import { ReactComponent as AddIcon } from '../../../assets/icons/Add.svg';
 import { ReactComponent as EditIcon } from '../../../assets/icons/Edit.svg';
 import {
   toggleCreateAppFormOpen,
   toggleCreateAppFormMinimize,
   setToast,
+  getApps,
+  getAppsBanner,
+  setFilter,
 } from '../appsSlice';
+import useNavigateWithState from '../../../hooks/useNavigateWithState';
+import { PLATFORM, TOAST_INITIAL_DATA } from '../../../constants';
 import styles from './index.module.scss';
-import CreateAppForm from '../CreateAppForm';
-import Toast from '../../../components/Toast';
-import { TOAST_INITIAL_DATA } from '../../../constants';
-import { useNavigate } from 'react-router-dom';
 
-const Apps = () => {
+const AppsPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const toastData = useSelector((state) => state.apps?.toastData);
+  const navigateWithState = useNavigateWithState();
+  const [searchParams] = useSearchParams();
   const user = useSelector((state) => state?.user?.user);
+  const toastData = useSelector((state) => state.apps?.toastData);
+  const appData = useSelector((state) => state?.apps?.appData);
+  const banner = useSelector((state) => state?.apps?.banner);
+  const filter = useSelector((state) => state?.apps?.filter);
+  // const categories = useSelector((state) => state?.metadata?.data?.appCategories);
   const isCreateAppFormOpen = useSelector(
-    (state) => state.apps?.isCreateAppFormOpen
+    (state) => state.apps?.createAppForm?.isOpen
   );
   const isCreateAppFormMinimize = useSelector(
-    (state) => state.apps?.isCreateAppFormMinimize
+    (state) => state.apps?.createAppForm?.isMinimize
   );
+  const query = searchParams.get('q')?.trim();
+  const isSearch = query?.length;
 
-  const appList = [
-    {
-      name: 'Whatsapp',
-      imgUrl:
-        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128-rw',
-      category: 'Social',
-      rating: '4.2',
-    },
-    {
-      name: 'Instagram',
-      imgUrl:
-        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128-rw',
-      category: 'Social',
-      rating: '4.2',
-    },
-    {
-      name: 'Phonepe',
-      imgUrl:
-        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128-rw',
-      category: 'Payment',
-      rating: '4.2',
-    },
-    {
-      name: 'Paytm',
-      imgUrl:
-        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128-rw',
-      category: 'Payment',
-      rating: '4.2',
-    },
-    {
-      name: 'Google',
-      imgUrl:
-        'https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s128-rw',
-      category: 'Payment',
-      rating: '4.2',
-    },
-  ];
+  console.log(appData);
+
+  useEffect(() => {
+    dispatch(getApps({ searchQuery: query?.trim() }));
+    if (!query?.length) {
+      dispatch(getAppsBanner());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
   const handleCreateAppClick = () => {
     if (!user) {
-      return navigate('/auth');
+      return navigateWithState('/auth');
     }
     if (isCreateAppFormMinimize) {
       dispatch(toggleCreateAppFormMinimize());
@@ -77,21 +65,75 @@ const Apps = () => {
   };
   return (
     <div className={styles.container}>
-      {/* {
-        appList.map(appInfo=><AppHorizontalTile key={appInfo.name} {...appInfo}/>)
-      } */}
-      <GridView
-        heading={'Top Apps'}
-        items={appList.map((appInfo) => (
-          <AppTileMemo key={appInfo.name} {...appInfo} />
+      {!isSearch && (
+        <Carousel
+          items={
+            banner?.list.length
+              ? banner?.list.map((e) => (
+                  <CarouselItem key={e._id} imgPath={e.image} />
+                ))
+              : banner?.isLoading
+              ? [...Array(3).keys()].map((id) => (
+                  <CarouselItemShimmer key={id} />
+                ))
+              : []
+          }
+        />
+      )}
+
+      <div className={styles.container__chips}>
+        {Object.entries(PLATFORM).map(([key, value]) => (
+          <Chip
+            key={key}
+            label={key}
+            className={styles.container__chips__item}
+            selected={filter?.platform === value}
+            onClick={() => {
+              if (filter?.platform === value) {
+                return;
+              }
+              dispatch(setFilter({ platform: value }));
+              dispatch(
+                getApps({ enableLoading: true, searchQuery: query?.trim() })
+              );
+            }}
+          />
         ))}
-        itemsClass={styles.appsContainer__gridItems}
-      />
+      </div>
+
+      {appData?.isLoading ? (
+        <GridView
+          items={[...Array(6).keys()].map((id) => (
+            <IconTileShimmer key={id} />
+          ))}
+          wrapperClass={styles.container__gridWrapper}
+          itemsClass={styles.container__gridItems}
+        />
+      ) : appData?.items?.length ? (
+        <GridView
+          heading={!isSearch ? 'Top Apps' : 'Results'}
+          items={appData?.items?.map((app) => (
+            <IconTileMemo
+              key={app._id}
+              id={app._id}
+              name={app.name}
+              category={app.categories?.[0]}
+              imgUrl={app.icon?.url}
+            />
+          ))}
+          wrapperClass={styles.container__gridWrapper}
+          itemsClass={styles.container__gridItems}
+        />
+      ) : (
+        <p className={styles.container__gridWrapper}>No Apps Found</p>
+      )}
       <IconButton
-        // icon={<AddIcon className={styles.container__btnCreateApp__icon} />}
         icon={
           isCreateAppFormMinimize ? (
-            <EditIcon className={styles.container__btnCreateApp__icon} style={{height:'30px', width:'30px'}}/>
+            <EditIcon
+              className={styles.container__btnCreateApp__icon}
+              style={{ height: '30px', width: '30px' }}
+            />
           ) : (
             <AddIcon className={styles.container__btnCreateApp__icon} />
           )
@@ -110,11 +152,8 @@ const Apps = () => {
           }}
         />
       )}
-      {/* {
-        appList.map(appInfo=><AppVerticalTile key={appInfo.name} {...appInfo}/>)
-      } */}
     </div>
   );
 };
 
-export default Apps;
+export default AppsPage;

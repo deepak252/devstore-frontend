@@ -20,4 +20,14 @@ export const appFormValidator = {
       return 'Application file is required';
     }
   },
+  attachmentIcon: (val) => {
+    if (!val) {
+      return 'App icon is required';
+    }
+  },
+  attachmentImages: (val) => {
+    if (!val || !val.length) {
+      return 'Upload at least one image';
+    }
+  },
 };

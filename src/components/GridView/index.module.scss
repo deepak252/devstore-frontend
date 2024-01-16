@@ -2,18 +2,10 @@
 @import '../../common';
 
 .container{
-  margin: 15px 30px;
-  &__items{
+  // margin: 15px 30px;
+  &__items__vertical{
     display: grid;
     gap: 16px;
-
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    // overflow: scroll;
 
     @media #{$MEDIA_SCREEN_BELOW_XS}{
       grid-template-columns: repeat(3, 1fr);
@@ -21,7 +13,7 @@
     @media #{$MEDIA_SCREEN_XS_TO_SM}{
       grid-template-columns: repeat(4, 1fr);
     }
-    @media #{$MEDIA_SCREEN_XM_TO_MD}{
+    @media #{$MEDIA_SCREEN_SM_TO_MD}{
       grid-template-columns: repeat(5, 1fr);
     }
     @media #{$MEDIA_SCREEN_MD_TO_LG}{
@@ -30,6 +22,15 @@
     @media #{$MEDIA_SCREEN_ABOVE_LG}{
       grid-template-columns: repeat(7, 1fr);
     }
+  }
 
+  &__items__horizontal{
+    display: grid;
+    // grid-auto-columns: 170px;
+    grid-auto-flow: column;
+    gap: 10px;
+    overflow-x: auto;
+    justify-content: left;
+    padding: 8px;
   }
 }
