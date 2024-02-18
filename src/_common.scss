@@ -167,3 +167,22 @@
     padding: 16px;
   }
 }
+
+
+@mixin scrollbar-rounded($width: 4px) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: $width 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $GRAY_3;
+    border-radius: $width;
+    &:hover {
+      background: $GRAY_4;
+    }
+  }
+}

@@ -8,18 +8,18 @@ import { getFileSizeMb } from '../../../utils/fileUtil';
 import { ATTACHMENT_TYPE } from '../../../constants';
 
 const AttachmentAppTile = ({ attachmentFile, onRemove, className }) => {
-  const uploadAppProgress = useSelector(
-    (state) => state.apps?.uploadApp?.progress
+  const uploadProgress = useSelector(
+    (state) => state.apps?.appPackage?.progress
   );
-  const uploadAppError = useSelector((state) => state.apps?.uploadApp?.error);
+  const uploadError = useSelector((state) => state.apps?.appPackage?.error);
   const isUploadingApp = useSelector(
-    (state) => state.apps?.uploadApp?.isLoading
+    (state) => state.apps?.appPackage?.isLoading
   );
   const getUploadProgress = () => {
-    if (!uploadAppProgress) {
+    if (!uploadProgress) {
       return '';
     }
-    return ` | ${uploadAppProgress?.percent} %`;
+    return ` | ${uploadProgress?.percent} %`;
   };
   return (
     <Attachment
@@ -31,7 +31,7 @@ const AttachmentAppTile = ({ attachmentFile, onRemove, className }) => {
         <div className='mr-8' style={{ display: 'flex' }}>
           {isUploadingApp ? (
             <Loader size='16px' borderWidth='4px' />
-          ) : uploadAppError ? (
+          ) : uploadError ? (
             <ErrorCircleIcon className='size-24' />
           ) : (
             <CheckCircleIcon className='size-24' />

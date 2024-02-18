@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { clearUserCache, getAuthToken } from '../app/cache';
+import { signOut } from '../features/auth/authSlice';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
+  withCredentials: true
 });
 
-export const setupInterceptor = (navigate) => {
+export const setupInterceptor = (navigate, dispatch) => {
   api.interceptors.request.use(
     (config) => config,
     (error) => Promise.reject(error)
@@ -18,7 +20,8 @@ export const setupInterceptor = (navigate) => {
       const statusCode = error.response?.status;
       if (statusCode === 401) {
         clearUserCache();
-        navigate('/auth');
+        dispatch && dispatch(signOut());
+        navigate && navigate('/auth');
       }
       return Promise.reject(error);
     }

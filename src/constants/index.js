@@ -40,3 +40,8 @@ export const PLATFORM = Object.freeze({
   iOS: 'ios',
 });
 
+export const PROJECT_TYPE = Object.freeze({
+  APPS: 'apps',
+  GAMES: 'games',
+  WEBSITES: 'websites'
+});

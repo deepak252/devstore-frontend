@@ -9,7 +9,7 @@ const formDataInitialState = {
   isSourceCodePublic: true,
   isPrivate: false,
   platform: PLATFORM.Android,
-  attachmentApp: null, // File Instance
+  attachmentPackage: null, // File Instance
   attachmentIcon: null,
   attachmentImages: [],
   attachmentVideo: null,
@@ -19,14 +19,11 @@ const formDataInitialState = {
 const initialState = {
   appData: {
     items: [],
-    pageNumber: 1,
-    pageSize: 10,
-    totalResults: 0,
+    page: 1,
+    limit: 10,
+    totalPages: 0,
     isLoading: false,
     error: null,
-  },
-  search: {
-    query: '',
   },
   filter: {
     platform: PLATFORM.All, // all, android, ios
@@ -44,8 +41,8 @@ const initialState = {
     isLoading: false,
     error: null,
   },
-  uploadApp: {
-    appInfo: null,
+  appPackage: {
+    info: null,
     isLoading: false,
     progress: null,
     error: null,
@@ -74,7 +71,7 @@ const appsSlice = createSlice({
     getAppsSuccess: (state, action) => {
       state.appData.isLoading = false;
       state.appData.error = null;
-      state.appData.items = action.payload?.data?.apps;
+      state.appData.items = action.payload?.data?.projects;
     },
     getAppsFailure: (state, action) => {
       state.appData.isLoading = false;
@@ -115,50 +112,63 @@ const appsSlice = createSlice({
       state.createAppForm.error = null;
     },
     createAppSuccess: (state, action) => {
-      state.createAppForm.isLoading = false;
-      state.createAppForm.error = null;
+      state.createAppForm = {
+        isLoading: false,
+        error: null,
+        formData: formDataInitialState,
+        isOpen: false,
+        isMinimize: false,
+      }
+      state.toastData = {
+        type: TOAST_TYPE.SUCCESS,
+        message: "App added successfully!",
+      };
     },
     createAppFailure: (state, action) => {
       state.createAppForm.isLoading = false;
       state.createAppForm.error = action.payload;
+      state.toastData = {
+        type: TOAST_TYPE.ERROR,
+        message: action.payload ||  "Something went wrong",
+      };
     },
     createAppCancelled: (state, action) => {
       state.createAppForm.isLoading = false;
       state.createAppForm.error = null;
       console.log('createAppCancelled');
     },
-    uploadApp: (state, action) => {
-      state.uploadApp.isLoading = true;
-      state.uploadApp.error = null;
-      state.uploadApp.appInfo = null;
+    uploadAppPackage: (state, action) => {
+      state.appPackage.isLoading = true;
+      state.appPackage.error = null;
+      state.appPackage.info = null;
     },
-    uploadAppProgress: (state, action) => {
-      state.uploadApp.progress = action.payload;
+    uploadAppPackageProgress: (state, action) => {
+      state.appPackage.progress = action.payload;
     },
-    uploadAppSuccess: (state, action) => {
-      state.uploadApp.error = null;
-      state.uploadApp.isLoading = false;
-      state.uploadApp.appInfo = action.payload?.data;
+    uploadAppPackageSuccess: (state, action) => {
+      state.appPackage.error = null;
+      state.appPackage.isLoading = false;
+      state.appPackage.info = action.payload?.data;
     },
-    uploadAppCancelled: (state, action) => {
-      state.uploadApp = {
-        appInfo: null,
+    uploadAppPackageCancelled: (state, action) => {
+      state.appPackage = {
+        info: null,
         isLoading: false,
         progress: null,
         error: null,
       };
       console.log('uploadAppCancelled');
     },
-    uploadAppFailure: (state, action) => {
-      state.uploadApp = {
-        appInfo: null,
+    uploadAppPackageFailure: (state, action) => {
+      state.appPackage = {
+        info: null,
         isLoading: false,
         progress: null,
         error: action.payload,
       };
       state.toastData = {
         type: TOAST_TYPE.ERROR,
-        message: action.payload,
+        message: action.payload || "Something went wrong",
       };
     },
     getAppsBanner: (state, action) => {
@@ -196,11 +206,11 @@ export const {
   createAppSuccess,
   createAppFailure,
   createAppCancelled,
-  uploadApp,
-  uploadAppProgress,
-  uploadAppSuccess,
-  uploadAppCancelled,
-  uploadAppFailure,
+  uploadAppPackage,
+  uploadAppPackageProgress,
+  uploadAppPackageSuccess,
+  uploadAppPackageCancelled,
+  uploadAppPackageFailure,
   getAppsBanner,
   getAppsBannerSuccess,
   getAppsBannerFailure,

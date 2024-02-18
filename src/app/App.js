@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import DefaultLayout from '../components/DefaultLayout';
 import AppsPage from '../features/apps/AppsPage';
 import AppDetailsPage from '../features/apps/AppDetailsPage';
+import WebsitesPage from '../features/websites/WebsitesPage';
+import WebsiteDetailsPage from '../features/websites/WebsiteDetailsPage';
 import Games from '../pages/Games';
-import Websites from '../pages/Websites';
 import Auth from '../features/auth/AuthPage';
 import PageNotFound from '../components/Error/PageNotFound';
 import { useEffect } from 'react';
@@ -23,7 +24,7 @@ function App() {
   const signedIn = isSignedIn();
 
   useEffect(() => {
-    setupInterceptor(navigateWithState);
+    setupInterceptor(navigateWithState, dispatch);
     dispatch(getMetadata());
     if (signedIn) {
       dispatch(getUser());
@@ -38,10 +39,17 @@ function App() {
         {/* <Route path='/' element={<HomePage />} /> */}
         <Route path='/' element={<DefaultLayout />}>
           <Route index element={<HomePage />} />
-          <Route path='apps' element={<AppsPage />} />
-          <Route path='apps/:appId' element={<AppDetailsPage />} />
+          <Route path='apps'>
+            <Route index element={<AppsPage />} />
+            <Route path=':appId' element={<AppDetailsPage />} />
+          </Route>
+          {/* <Route path='apps' element={<AppsPage />} /> */}
+          <Route path='websites'>
+            <Route index element={<WebsitesPage />} />
+            <Route path=':websiteId' element={<WebsiteDetailsPage />} />
+          </Route>
+          {/* <Route path='websites/:websiteId' element={<WebsitesPage />} /> */}
           <Route path='games' element={<Games />} />
-          <Route path='websites' element={<Websites />} />
           <Route path=':username' element={<ProfilePage />} />
           <Route path='*' element={<PageNotFound />} />
         </Route>

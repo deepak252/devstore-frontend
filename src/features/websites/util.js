@@ -1,7 +1,7 @@
 import { REGEX } from '../../constants';
 import { isEmptyString } from '../../utils/validator';
 
-export const appFormValidator = {
+export const websiteFormValidator = {
   name: (val) => {
     if (isEmptyString(val)) {
       return "App name can't be empty";
@@ -13,11 +13,6 @@ export const appFormValidator = {
     }
     if (!REGEX.URL.test(val)) {
       return 'Invalid source code URL';
-    }
-  },
-  attachmentPackage: (val) => {
-    if (!val) {
-      return 'Application package file is required';
     }
   },
   attachmentIcon: (val) => {

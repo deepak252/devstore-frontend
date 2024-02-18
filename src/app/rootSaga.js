@@ -3,6 +3,7 @@ import metadataSaga from '../features/metadata/metadataSaga';
 import authSaga from '../features/auth/authSaga';
 import userSaga from '../features/user/userSaga';
 import appsSaga from '../features/apps/appsSaga';
+import websitesSaga from '../features/websites/websitesSaga';
 import homeSaga from '../features/home/homeSaga';
 import profileSaga from '../features/profile/profileSaga';
 
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     appsSaga(),
     homeSaga(),
     profileSaga(),
+    websitesSaga()
   ]);
 }

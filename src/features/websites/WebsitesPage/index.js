@@ -3,64 +3,62 @@ import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import IconButton from '../../../components/Buttons/IconButton';
 import GridView from '../../../components/GridView';
-import CreateAppForm from '../CreateAppForm';
 import Toast from '../../../components/Toast';
 import Carousel, { CarouselItem } from '../../../components/Carousel';
 import CarouselItemShimmer from '../../../components/Carousel/CarouselItem/CarouselItemShimmer';
-import IconTileShimmer from '../../../components/Tiles/IconTile/IconTileShimmer';
-import Chip from '../../../components/Chip';
-import { IconTileMemo } from '../../../components/Tiles/IconTile';
+import FeaturedTileShimmer from '../../../components/Tiles/FeaturedTile/FeaturedTileShimmer';
 import { ReactComponent as AddIcon } from '../../../assets/icons/Add.svg';
 import { ReactComponent as EditIcon } from '../../../assets/icons/Edit.svg';
 import {
-  toggleCreateAppFormOpen,
-  toggleCreateAppFormMinimize,
+  toggleCreateWebsiteFormOpen,
+  toggleCreateWebsiteFormMinimize,
   setToast,
-  getApps,
-  getAppsBanner,
-  setFilter,
-} from '../appsSlice';
+  getWebsites,
+  getWebsitesBanner,
+} from '../websitesSlice';
 import useNavigateWithState from '../../../hooks/useNavigateWithState';
-import { PLATFORM, TOAST_INITIAL_DATA } from '../../../constants';
+import { TOAST_INITIAL_DATA } from '../../../constants';
 import styles from './index.module.scss';
+import CreateWebsiteForm from '../CreateWebsiteForm';
+import FeaturedTile from '../../../components/Tiles/FeaturedTile';
 
-const AppsPage = () => {
+const WebsitesPage = () => {
   const dispatch = useDispatch();
   const navigateWithState = useNavigateWithState();
   const [searchParams] = useSearchParams();
   const user = useSelector((state) => state?.user?.user);
-  const toastData = useSelector((state) => state.apps?.toastData);
-  const appData = useSelector((state) => state?.apps?.appData);
-  const banner = useSelector((state) => state?.apps?.banner);
-  const filter = useSelector((state) => state?.apps?.filter);
+  const toastData = useSelector((state) => state.websites?.toastData);
+  const websiteData = useSelector((state) => state?.websites?.websiteData);
+  const banner = useSelector((state) => state?.websites?.banner);
+  // const filter = useSelector((state) => state?.websites?.filter);
   // const categories = useSelector((state) => state?.metadata?.data?.appCategories);
-  const isCreateAppFormOpen = useSelector(
-    (state) => state.apps?.createAppForm?.isOpen
+  const isCreateWebsiteFormOpen = useSelector(
+    (state) => state.websites?.createWebsiteForm?.isOpen
   );
-  const isCreateAppFormMinimize = useSelector(
-    (state) => state.apps?.createAppForm?.isMinimize
+  const isCreateWebsiteFormMinimize = useSelector(
+    (state) => state.websites?.createWebsiteForm?.isMinimize
   );
   const query = searchParams.get('q')?.trim();
   const isSearch = query?.length;
 
-  console.log(appData);
+  console.log(websiteData);
 
   useEffect(() => {
-    dispatch(getApps({ searchQuery: query?.trim() }));
+    dispatch(getWebsites({ searchQuery: query?.trim() }));
     if (!query?.length) {
-      dispatch(getAppsBanner());
+      dispatch(getWebsitesBanner());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  const handleAddAppClick = () => {
+  const handleAddWebsiteClick = () => {
     if (!user) {
       return navigateWithState('/auth');
     }
-    if (isCreateAppFormMinimize) {
-      dispatch(toggleCreateAppFormMinimize());
+    if (isCreateWebsiteFormMinimize) {
+      dispatch(toggleCreateWebsiteFormMinimize());
     } else {
-      dispatch(toggleCreateAppFormOpen());
+      dispatch(toggleCreateWebsiteFormOpen());
     }
   };
   return (
@@ -81,55 +79,36 @@ const AppsPage = () => {
         />
       )}
 
-      <div className={styles.container__chips}>
-        {Object.entries(PLATFORM).map(([key, value]) => (
-          <Chip
-            key={key}
-            label={key}
-            className={styles.container__chips__item}
-            selected={filter?.platform === value}
-            onClick={() => {
-              if (filter?.platform === value) {
-                return;
-              }
-              dispatch(setFilter({ platform: value }));
-              dispatch(
-                getApps({ enableLoading: true, searchQuery: query?.trim() })
-              );
-            }}
-          />
-        ))}
-      </div>
-
-      {appData?.isLoading ? (
+      {websiteData?.isLoading ? (
         <GridView
-          items={[...Array(6).keys()].map((id) => (
-            <IconTileShimmer key={id} />
+          items={[...Array(4).keys()].map((id) => (
+            <FeaturedTileShimmer key={id} />
           ))}
           wrapperClass={styles.container__gridWrapper}
           itemsClass={styles.container__gridItems}
         />
-      ) : appData?.items?.length ? (
+      ) : websiteData?.items?.length ? (
         <GridView
-          heading={!isSearch ? 'Top Apps' : 'Results'}
-          items={appData?.items?.map((app) => (
-            <IconTileMemo
-              key={app._id}
-              id={app._id}
-              name={app.name}
-              username={app.owner?.username}
-              imgUrl={app.icon}
+          heading={!isSearch ? 'Top Websites' : 'Results'}
+          items={websiteData?.items?.map((website) => (
+            <FeaturedTile
+              key={website._id}
+              name={website.name}
+              iconUrl={website.icon}
+              featuredImageUrl={website.icon}
+              owner={website.owner?.username}
+              redirectUrl={`/websites/${website._id}`}
             />
           ))}
           wrapperClass={styles.container__gridWrapper}
           itemsClass={styles.container__gridItems}
         />
       ) : (
-        <p className={styles.container__gridWrapper}>No Apps Found</p>
+        <p className={styles.container__gridWrapper}>No Websites Found</p>
       )}
       <IconButton
         icon={
-          isCreateAppFormMinimize ? (
+          isCreateWebsiteFormMinimize ? (
             <EditIcon
               className={styles.container__btnCreateApp__icon}
               style={{ height: '30px', width: '30px' }}
@@ -139,9 +118,9 @@ const AppsPage = () => {
           )
         }
         className={styles.container__btnCreateApp}
-        onClick={handleAddAppClick}
+        onClick={handleAddWebsiteClick}
       />
-      {isCreateAppFormOpen && !isCreateAppFormMinimize && <CreateAppForm />}
+      {isCreateWebsiteFormOpen && !isCreateWebsiteFormMinimize && <CreateWebsiteForm />}
 
       {toastData?.message && (
         <Toast
@@ -156,4 +135,4 @@ const AppsPage = () => {
   );
 };
 
-export default AppsPage;
+export default WebsitesPage;

@@ -1,0 +1,32 @@
+@import '../../../variables';
+@import '../../../common';
+
+.container {
+
+  &__chips{
+    margin: 0px 30px;
+    &__item{
+      margin-right: 12px;
+    }
+  }
+
+  &__gridWrapper {
+    margin: 15px 30px 50px;
+  }
+
+  //   &__gridItems{
+  //   grid-template-columns: repeat(10, 1fr);
+  // }
+
+  &__btnCreateApp {
+    @include fab-fixed;
+    height: 46px;
+    width: 46px;
+
+    &__icon {
+      height: 40px;
+      width: 40px;
+      fill: $ON_PRIMARY_CONTAINER;
+    }
+  }
+}

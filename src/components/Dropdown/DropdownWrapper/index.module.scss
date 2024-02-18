@@ -7,6 +7,7 @@
 
   &__content {
     @include disable-select;
+    @include scrollbar-rounded;
     position: absolute;
     z-index: $Z_INDEX_DROPDOWN;
     background-color: $SURFACE;

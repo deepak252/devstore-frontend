@@ -23,25 +23,25 @@ import {
   getAppsBanner,
   getAppsBannerFailure,
   getAppsBannerSuccess,
-  uploadApp,
-  uploadAppCancelled,
-  uploadAppFailure,
-  uploadAppProgress,
-  uploadAppSuccess,
+  uploadAppPackage,
+  uploadAppPackageCancelled,
+  uploadAppPackageFailure,
+  uploadAppPackageProgress,
+  uploadAppPackageSuccess,
 } from './appsSlice';
 import { uploadTask } from '../../services/uploadTask';
-import { APPS_API, APP_UPLOAD_API, BANNER_API } from '../../constants/apiPath';
+import { APPS_API, PACKAGE_UPLOAD_API, BANNER_API } from '../../constants/apiPath';
 import { getRequest, postRequest } from '../../services/api';
 import store from '../../app/store';
 
 function* getAppsHandler(action) {
   try {
-    const { pageNumber = 1, searchQuery } = action.payload ?? {};
+    const { page = 1, searchQuery: search } = action.payload ?? {};
     let filter = yield select((state) => state.apps?.filter);
     const response = yield call(postRequest, APPS_API, {
       queryParams: {
-        pageNumber,
-        searchQuery,
+        page,
+        search,
       },
       data: filter,
     });
@@ -110,7 +110,7 @@ function* createAppHandler(action) {
   }
 }
 
-function* uploadAppHandler(action) {
+function* uploadAppPackageHandler(action) {
   try {
     const formData = action.payload;
     // To abort the api call
@@ -119,14 +119,14 @@ function* uploadAppHandler(action) {
     // Fork a new task to handle the API call
     const task = yield fork(
       uploadTask,
-      APP_UPLOAD_API,
+      PACKAGE_UPLOAD_API,
       {
         data: formData,
         signal: controller.signal,
         onUploadProgress: (progressEvent) => {
           const { loaded, total, progress } = progressEvent;
           store.dispatch(
-            uploadAppProgress({
+            uploadAppPackageProgress({
               loaded,
               total,
               percent: Math.round(progress * 100),
@@ -136,26 +136,26 @@ function* uploadAppHandler(action) {
       },
       function* (successResponse, error) {
         if (successResponse) {
-          yield put(uploadAppSuccess(successResponse?.data));
+          yield put(uploadAppPackageSuccess(successResponse?.data));
         } else {
-          yield put(uploadAppFailure(error?.message || 'Something went wrong'));
+          yield put(uploadAppPackageFailure(error?.message || 'Something went wrong'));
         }
       }
     );
 
     const [, , cancelUpload] = yield race([
-      take(uploadAppSuccess.type),
-      take(uploadAppFailure.type),
-      take(uploadAppCancelled.type),
+      take(uploadAppPackageSuccess.type),
+      take(uploadAppPackageFailure.type),
+      take(uploadAppPackageCancelled.type),
     ]);
     if (cancelUpload) {
       // abort the api call
       controller.abort();
     }
-    console.log('uploadAppHandler end');
+    console.log('uploadAppPackageHandler end');
     cancel(task);
   } catch (e) {
-    console.error('uploadAppHandler', e);
+    console.error('uploadAppPackageHandler', e);
   }
 }
 
@@ -182,12 +182,12 @@ export default function* appsSaga() {
     takeLatest(getApps.type, getAppsHandler),
     takeLatest(getAppDetails.type, getAppDetailsHandler),
     takeLatest(createApp.type, createAppHandler),
-    takeLatest(uploadApp.type, uploadAppHandler),
+    takeLatest(uploadAppPackage.type, uploadAppPackageHandler),
     takeLatest(getAppsBanner.type, getAppsBannerHandler),
   ]);
 }
 
-// function* uploadAppHandler(action) {
+// function* uploadAppPackageHandler(action) {
 //   try {
 //     const formData = action.payload;
 //     // To abort the api call
@@ -197,9 +197,9 @@ export default function* appsSaga() {
 //     const task = yield fork(apiCallTask, formData, controller);
 
 //     const { success, failure, cancelUpload } = yield race({
-//       success: take(uploadAppSuccess.type),
-//       failure: take(uploadAppFailure.type),
-//       cancelUpload: take(uploadAppCancelled.type),
+//       success: take(uploadAppPackageSuccess.type),
+//       failure: take(uploadAppPackageFailure.type),
+//       cancelUpload: take(uploadAppPackageCancelled.type),
 //     });
 //     if (success) {
 //       yield cancel(task); // Cancel the API call task
@@ -210,20 +210,20 @@ export default function* appsSaga() {
 //       controller.abort();
 //     }
 //   } catch (e) {
-//     console.error('uploadAppHandler', e);
+//     console.error('uploadAppPackageHandler', e);
 //   }
 // }
 
-// function* uploadAppHandler(action) {
+// function* uploadAppPackageHandler(action) {
 //   try {
 //     const formData = action.payload;
 
-//     const response = yield call(postRequest, APP_UPLOAD_API, {
+//     const response = yield call(postRequest, PACKAGE_UPLOAD_API, {
 //       data: formData,
 //       onUploadProgress: (progressEvent) => {
 //         const { loaded, total, progress } = progressEvent;
 //         store.dispatch(
-//           uploadAppProgress({
+//           uploadAppPackageProgress({
 //             loaded,
 //             total,
 //             percent: Math.round(progress * 100),
@@ -233,12 +233,12 @@ export default function* appsSaga() {
 //     });
 
 //     if (response && response.status >= 200 && response.status <= 299) {
-//       yield put(uploadAppSuccess(response.data));
+//       yield put(uploadAppPackageSuccess(response.data));
 //     } else {
 //       throw response?.data || response;
 //     }
 //   } catch (e) {
-//     console.error('uploadApp', e);
-//     yield put(uploadAppFailure(e?.message || 'Something went wrong'));
+//     console.error('uploadAppPackage', e);
+//     yield put(uploadAppPackageFailure(e?.message || 'Something went wrong'));
 //   }
 // }

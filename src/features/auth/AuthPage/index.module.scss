@@ -24,6 +24,7 @@
   }
 
   &__form {
+    @include scrollbar-rounded($width: 8px);
     position: absolute;
     left: 70%;
     top: 50%;
